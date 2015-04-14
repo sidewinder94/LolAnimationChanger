@@ -117,11 +117,55 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ManifestName" xml:space="preserve">
-    <value>manifest.json</value>
+  <data name="ApplyBackground" xml:space="preserve">
+    <value>2. Apply Background to Launcher</value>
   </data>
-  <data name="RootAddress" xml:space="preserve">
-    <value>https://dl.dropboxusercontent.com/u/42390504/LolAnimationChanger/</value>
-    <comment>https://googledrive.com/host/0B2MpshTpJ88FfjEyNXM1VFpOWF9KanNNb21vODNfb1BxeDIzcFNwUGliNThGMTI1YzQwanc/</comment>
+  <data name="BadFolder" xml:space="preserve">
+    <value>I can't find the "RADS" folder in the selected directory.
+Now closing the application.</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="CantCreateDLDir" xml:space="preserve">
+    <value>Can't create the temporary download directory</value>
+  </data>
+  <data name="ChooseDownload" xml:space="preserve">
+    <value>Choose a theme to Download : </value>
+  </data>
+  <data name="ConnectionError" xml:space="preserve">
+    <value>Connection Error</value>
+  </data>
+  <data name="ConnectionMessage" xml:space="preserve">
+    <value>Can't download manifest file, please check your internet connection</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>Download !</value>
+  </data>
+  <data name="DownloadBackground" xml:space="preserve">
+    <value>1. Download Animation Files</value>
+  </data>
+  <data name="DownloadError" xml:space="preserve">
+    <value>Download Error</value>
+  </data>
+  <data name="DownloadFailed" xml:space="preserve">
+    <value>Failed to download the Login Screen Archive.
+It can be due to one of the following problems :
+- The Checksum verification failed (to retry without checking click Yes)
+- You are not connected to the internet or cannot access googledrive.com
+- The destination directory is write-protected or your disk is full
+Retry ?</value>
+  </data>
+  <data name="DownloadSuccess" xml:space="preserve">
+    <value>Download Complete !</value>
+  </data>
+  <data name="DownloadSucceeded" xml:space="preserve">
+    <value>Login Screen Downloaded Successfully</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="FindLolLauncher" xml:space="preserve">
+    <value>Find League of Legends Launcher (lol.launcher.exe)</value>
   </data>
 </root>
