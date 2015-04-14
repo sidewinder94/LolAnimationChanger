@@ -6,25 +6,49 @@ using System.Net;
 using System.Security.Cryptography;
 using System.Text;
 using System.Windows;
+using LolAnimationChanger.Annotations;
+using LolAnimationChanger.Resources;
 using LolAnimationChanger.Resources.Lang;
+using Utils.Text;
 
 namespace LolAnimationChanger.Data
 {
+    //Never Instantiated explicitely, but instancited by JSON Deserialization
+    [UsedImplicitly]
     public class LoginScreen
     {
-        private static String _basePath = @"downloads\";
+        private const String BasePath = @"downloads\";
         public String Name;
         public String NameFr;
         public String Filename;
         public String SHA1;
 
+        public Boolean IsExtracted
+        {
+            get
+            {
+                return Directory.Exists(String.Format("{0}{1}{2}",
+                    Configuration.GamePath,
+                    Properties.Resources.ThemeDirPath,
+                    Filename.Replace(".zip", "")));
+            }
+        }
+
+        public Boolean IsDownloaded
+        {
+            get
+            {
+                return CheckIntegrity();
+            }
+        }
+
         public void Download(DownloadProgressChangedEventHandler progressHandler = null, AsyncCompletedEventHandler completedHandler = null)
         {
-            if (!Directory.Exists(_basePath))
+            if (!Directory.Exists(BasePath))
             {
                 try
                 {
-                    Directory.CreateDirectory(_basePath);
+                    Directory.CreateDirectory(BasePath);
                 }
                 catch (Exception)
                 {
@@ -36,17 +60,19 @@ namespace LolAnimationChanger.Data
             {
                 if (progressHandler != null) wc.DownloadProgressChanged += progressHandler;
                 if (completedHandler != null) wc.DownloadFileCompleted += completedHandler;
-                wc.DownloadFileAsync(new Uri(Properties.Resources.RootAddress + Filename), _basePath + Filename);
+                wc.DownloadFileAsync(new Uri(Properties.Resources.RootAddress + Filename), BasePath + Filename);
             }
         }
 
 
         public Boolean CheckIntegrity()
         {
+            if (!File.Exists(BasePath + Filename)) return false;
+            FileStream stream = null;
             try
             {
                 var hasher = SHA1Managed.Create();
-                var stream = File.Open(_basePath + Filename, FileMode.Open, FileAccess.Read);
+                stream = File.Open(BasePath + Filename, FileMode.Open, FileAccess.Read);
                 stream.Position = 0;
                 StringBuilder sb = new StringBuilder();
                 foreach (var b in hasher.ComputeHash(stream))
@@ -60,10 +86,15 @@ namespace LolAnimationChanger.Data
             {
                 return false;
             }
+            finally
+            {
+                if (stream != null)
+                {
+                    stream.Close();
+                }
+            }
 
         }
-
-
 
         #region Overrides of Object
 
@@ -75,7 +106,13 @@ namespace LolAnimationChanger.Data
         /// </returns>
         public override string ToString()
         {
-            return CultureInfo.CurrentCulture.Name.StartsWith("fr", StringComparison.InvariantCultureIgnoreCase) ? NameFr : Name;
+            if (NameFr.IsEmpty())
+            {
+                return Name; ;
+            }
+            return CultureInfo.CurrentCulture.Name.StartsWith("fr", StringComparison.InvariantCultureIgnoreCase)
+                    ? NameFr
+                    : Name;
         }
 
         #endregion

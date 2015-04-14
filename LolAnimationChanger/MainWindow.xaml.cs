@@ -35,6 +35,7 @@ namespace LolAnimationChanger
         private String _downloadSpeed;
         private DateTime _lastUpdate;
         private long _lastBytes = 0;
+        private Boolean _displayUnkown;
 
         public Boolean DownloadEnabled
         {
@@ -52,6 +53,14 @@ namespace LolAnimationChanger
 
         public List<LoginScreen> LoginScreens { get; set; }
         public LoginScreen DownloadScreen { get; set; }
+
+        public IEnumerable<LoginScreen> AvailableScreens
+        {
+            get
+            {
+                return GetAvailableLoginScreens();
+            }
+        }
 
         public String DownloadSpeed
         {
@@ -86,6 +95,21 @@ namespace LolAnimationChanger
             }
         }
 
+        public Boolean DisplayUnknown
+        {
+            get
+            {
+                return _displayUnkown;
+            }
+            set
+            {
+                _displayUnkown = value;
+                OnPropertyChanged("AvailableScreens");
+            }
+        }
+
+        public Boolean ForceExtraction { get; set; }
+
         public MainWindow()
         {
             DownloadLoginScreenList();
@@ -100,8 +124,35 @@ namespace LolAnimationChanger
             DownloadEnabled = false;
             if (DownloadScreen != null)
             {
+                _lastBytes = 0;
                 DownloadScreen.Download(DownloadProgressHandler, DownloadCompletedHandler);
             }
+        }
+
+
+        private IEnumerable<LoginScreen> GetAvailableLoginScreens()
+        {
+            List<LoginScreen> result = LoginScreens.Where(l => l.IsDownloaded || l.IsExtracted).ToList();
+
+            if (DisplayUnknown)
+            {
+                var dirs = Directory.EnumerateDirectories(String.Format("{0}{1}",
+                    Configuration.GamePath, Properties.Resources.ThemeDirPath));
+                result.AddRange(from dir in dirs
+                                where !LoginScreens.Any(l => l.Filename.Equals(String.Format("{0}.zip", dir.RegExpReplace(@"^.*\\", ""))))
+                                select new LoginScreen()
+                                {
+                                    Name = dir.RegExpReplace(@"^.*\\", ""),
+                                });
+            }
+
+
+            return result.OrderBy(l => l.ToString());
+        }
+
+        private void ApplyButton_Click(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         #region Download Progress Handlers
@@ -140,6 +191,7 @@ namespace LolAnimationChanger
             if (DownloadScreen.CheckIntegrity())
             {
                 DownloadEnabled = true;
+                OnPropertyChanged("AvailableScreens");
                 MessageBox.Show(Strings.DownloadSucceeded, Strings.DownloadSuccess,
                     MessageBoxButton.OK, MessageBoxImage.Information);
             }
@@ -149,6 +201,7 @@ namespace LolAnimationChanger
                     MessageBoxImage.Exclamation);
                 if (result != MessageBoxResult.Yes) return;
                 DownloadProgress = 0.0d;
+                _lastBytes = 0;
                 DownloadScreen.Download(DownloadProgressHandler, DownloadCompletedHandler);
             }
         }
@@ -200,7 +253,7 @@ namespace LolAnimationChanger
             if (Directory.Exists(path + @"\RADS"))
             {
                 Configuration.PathSet = true;
-                Configuration.GamePath = path;
+                Configuration.GamePath = path + @"\";
             }
             else
             {
@@ -224,5 +277,7 @@ namespace LolAnimationChanger
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
+
+
     }
 }

@@ -77,5 +77,23 @@ namespace LolAnimationChanger.Properties {
                 return ResourceManager.GetString("RootAddress", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à RADS\projects\lol_air_client\releases\0.0.1.139\deploy\theme.properties.
+        /// </summary>
+        internal static string ThemeConfigFile {
+            get {
+                return ResourceManager.GetString("ThemeConfigFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à RADS\projects\lol_air_client\releases\0.0.1.139\deploy\mod\lgn\themes\.
+        /// </summary>
+        internal static string ThemeDirPath {
+            get {
+                return ResourceManager.GetString("ThemeDirPath", resourceCulture);
+            }
+        }
     }
 }

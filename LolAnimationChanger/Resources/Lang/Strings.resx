@@ -168,4 +168,16 @@ Retry ?</value>
   <data name="FindLolLauncher" xml:space="preserve">
     <value>Find League of Legends Launcher (lol.launcher.exe)</value>
   </data>
+  <data name="ApplyTheme" xml:space="preserve">
+    <value>Apply !</value>
+  </data>
+  <data name="DisplayUnknown" xml:space="preserve">
+    <value>Display Unknown Themes (use at your own risks)</value>
+  </data>
+  <data name="ForceExtraction" xml:space="preserve">
+    <value>Force Extraction for themes already present</value>
+  </data>
+  <data name="SelectTheme" xml:space="preserve">
+    <value>Select a Theme to apply : </value>
+  </data>
 </root>

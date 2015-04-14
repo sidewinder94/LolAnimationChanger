@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
+using LolAnimationChanger.Annotations;
 using Microsoft.Win32;
 using Newtonsoft.Json;
 
@@ -11,7 +13,6 @@ namespace LolAnimationChanger.Resources
         {
             File.WriteAllText(path, JsonConvert.SerializeObject(GetInstance()._dataHolder));
         }
-
 
         public static void Load(String path = "config.json")
         {
@@ -32,9 +33,7 @@ namespace LolAnimationChanger.Resources
                 if (found != null) PathSet = true;
 
                 if (Directory.Exists(GamePath + @"RADS")) PathSet = true;
-
             }
-
         }
 
         public static String GamePath
@@ -71,10 +70,13 @@ namespace LolAnimationChanger.Resources
         #endregion
 
         [Serializable]
+        //Public is needed for serialization to JSON and since it's a holder class, we have no need for the members of the outer class
+        [SuppressMessage("ReSharper", "MemberHidesStaticFromOuterClass")]
         private class DataHolder
         {
-            internal String GamePath = "";
-            internal Boolean PathSet = false;
+
+            public String GamePath = "";
+            public Boolean PathSet = false;
 
             public DataHolder()
             {

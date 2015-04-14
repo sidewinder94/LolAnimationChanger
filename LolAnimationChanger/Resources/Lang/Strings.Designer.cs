@@ -70,6 +70,15 @@ namespace LolAnimationChanger.Resources.Lang {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Apply !.
+        /// </summary>
+        public static string ApplyTheme {
+            get {
+                return ResourceManager.GetString("ApplyTheme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à I can&apos;t find the &quot;RADS&quot; folder in the selected directory.
         ///Now closing the application..
         /// </summary>
@@ -121,6 +130,15 @@ namespace LolAnimationChanger.Resources.Lang {
         public static string ConnectionMessage {
             get {
                 return ResourceManager.GetString("ConnectionMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Display Unknown Themes (use at your own risks).
+        /// </summary>
+        public static string DisplayUnknown {
+            get {
+                return ResourceManager.GetString("DisplayUnknown", resourceCulture);
             }
         }
         
@@ -198,6 +216,24 @@ namespace LolAnimationChanger.Resources.Lang {
         public static string FindLolLauncher {
             get {
                 return ResourceManager.GetString("FindLolLauncher", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Force Extraction for themes already present.
+        /// </summary>
+        public static string ForceExtraction {
+            get {
+                return ResourceManager.GetString("ForceExtraction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Select a Theme to apply : .
+        /// </summary>
+        public static string SelectTheme {
+            get {
+                return ResourceManager.GetString("SelectTheme", resourceCulture);
             }
         }
     }

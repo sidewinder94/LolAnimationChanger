@@ -124,4 +124,10 @@
     <value>https://dl.dropboxusercontent.com/u/42390504/LolAnimationChanger/</value>
     <comment>https://googledrive.com/host/0B2MpshTpJ88FfjEyNXM1VFpOWF9KanNNb21vODNfb1BxeDIzcFNwUGliNThGMTI1YzQwanc/</comment>
   </data>
+  <data name="ThemeConfigFile" xml:space="preserve">
+    <value>RADS\projects\lol_air_client\releases\0.0.1.139\deploy\theme.properties</value>
+  </data>
+  <data name="ThemeDirPath" xml:space="preserve">
+    <value>RADS\projects\lol_air_client\releases\0.0.1.139\deploy\mod\lgn\themes\</value>
+  </data>
 </root>
