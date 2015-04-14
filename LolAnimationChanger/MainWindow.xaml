@@ -1,8 +1,54 @@
 ﻿<Window x:Class="LolAnimationChanger.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}"
         Title="MainWindow" Height="350" Width="525">
+    <Window.Resources>
+        <Style TargetType="Button" x:Key="ButtonStyle">
+            <Setter Property="Margin" Value="10, 0"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="5,0"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+        </Style>
+        <Style TargetType="ComboBox" x:Key="ComboBoxStyle">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="SelectedIndex" Value="0"/>
+        </Style>
+        <Style TargetType="ProgressBar" x:Key="ProgressBarStyle">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Height" Value="15"/>
+            <Setter Property="Margin" Value="0,5"/>
+        </Style>
+    </Window.Resources>
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <GroupBox Grid.Row="0" Header="{Binding Source={StaticResource LocalizedStrings}, Path=Locale.DownloadBackground}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Column="0" Grid.Row="0" Content="{Binding Source={StaticResource LocalizedStrings}, Path=Locale.ChooseDownload}" HorizontalAlignment="Left"/>
+                <ComboBox Grid.Column="1"  Grid.Row="0" ItemsSource="{Binding LoginScreens}" SelectedItem="{Binding DownloadScreen}" Style="{StaticResource ComboBoxStyle}" IsEnabled="{Binding DownloadEnabled}"/>
+                <Button Grid.Column="2" Grid.Row="0" Content="{Binding Source={StaticResource LocalizedStrings}, Path=Locale.Download}" Style="{StaticResource ButtonStyle}" IsEnabled="{Binding DownloadEnabled}" Click="DownloadButton_Click" Margin="30,0,10,0"/>
+                <ProgressBar Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Value="{Binding DownloadProgress}" Visibility="{Binding DownloadProgressVisibility}" Style="{StaticResource ProgressBarStyle}"/>
+                <Label Grid.Column="2" Grid.Row="1" Content="{Binding DownloadSpeed}" HorizontalAlignment="Right"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox Grid.Row="1" Header="{Binding Source={StaticResource LocalizedStrings}, Path=Locale.ApplyBackground}">
+            <Grid>
+                
+            </Grid>
+        </GroupBox>
         
     </Grid>
 </Window>
