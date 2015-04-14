@@ -155,7 +155,6 @@ namespace LolAnimationChanger
 
         #endregion
 
-
         #region Initialization methods
 
         private void DownloadLoginScreenList()
@@ -215,13 +214,15 @@ namespace LolAnimationChanger
 
         #endregion
 
+        #region INotifyPropertyChanged implementation
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             var handler = PropertyChanged;
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
+        #endregion
     }
 }

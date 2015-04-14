@@ -30,6 +30,9 @@ namespace LolAnimationChanger.Resources
                 GamePath = found ?? @"C:\Riot Games\League of Legends\";
 
                 if (found != null) PathSet = true;
+
+                if (Directory.Exists(GamePath + @"RADS")) PathSet = true;
+
             }
 
         }
