@@ -52,6 +52,7 @@ namespace LolAnimationChanger
         }
 
         public List<LoginScreen> LoginScreens { get; set; }
+
         public LoginScreen DownloadScreen { get; set; }
 
         public IEnumerable<LoginScreen> AvailableScreens
@@ -118,7 +119,6 @@ namespace LolAnimationChanger
             InitializeComponent();
         }
 
-
         private void DownloadButton_Click(object sender, RoutedEventArgs e)
         {
             DownloadEnabled = false;
@@ -128,7 +128,6 @@ namespace LolAnimationChanger
                 DownloadScreen.Download(DownloadProgressHandler, DownloadCompletedHandler);
             }
         }
-
 
         private IEnumerable<LoginScreen> GetAvailableLoginScreens()
         {
