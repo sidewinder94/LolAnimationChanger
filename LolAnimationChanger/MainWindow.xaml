@@ -36,7 +36,7 @@
         </Grid.RowDefinitions>
         <Grid.ContextMenu>
             <ContextMenu>
-                <MenuItem Click="AboutMenuItem_Click"/>
+                <MenuItem Click="AboutMenuItem_Click" Header="{Binding Source={StaticResource LocalizedStrings}, Path=Locale.About, Mode=OneTime}"/>
             </ContextMenu>    
         </Grid.ContextMenu>
         <GroupBox Grid.Row="0" Header="{Binding Source={StaticResource LocalizedStrings}, Path=Locale.DownloadBackground, Mode=OneTime}">
