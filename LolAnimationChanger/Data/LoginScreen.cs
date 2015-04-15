@@ -101,8 +101,22 @@ namespace LolAnimationChanger.Data
 
         public Boolean Extract()
         {
+            var dirName = String.Format("{0}{1}{2}", Configuration.GamePath, Configuration.ThemeDirPath,
+                    Filename.Replace(".zip", ""));
             try
             {
+
+                if (Directory.Exists(dirName))
+                {
+                    //If by chance there is already a backu folder we delete it
+                    if (Directory.Exists(String.Format("{0}.bak", dirName)))
+                    {
+                        Directory.Delete(String.Format("{0}.bak", dirName), true);
+                    }
+                    //We backup the current folder to a .bak folder
+                    Directory.Move(dirName,
+                        String.Format("{0}.bak", dirName));
+                }
                 ZipFile.ExtractToDirectory(String.Format("{0}{1}", BasePath, Filename),
                     String.Format("{0}{1}", Configuration.GamePath,
                         Configuration.ThemeDirPath));
@@ -111,8 +125,19 @@ namespace LolAnimationChanger.Data
             }
             catch (Exception e)
             {
+                //If something failed, we retore the backup folder
+                Directory.Move(String.Format("{0}.bak", dirName), dirName);
                 Console.WriteLine(e);
+
                 return false;
+            }
+            finally
+            {
+                //we cleanup after ourselves, and selete the backup folder in case it's still here (meaning all went well)
+                if (Directory.Exists(String.Format("{0}.bak", dirName)))
+                {
+                    Directory.Delete(String.Format("{0}.bak", dirName), true);
+                }
             }
         }
 
