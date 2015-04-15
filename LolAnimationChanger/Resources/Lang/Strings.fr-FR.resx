@@ -117,100 +117,100 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ApplyBackground" xml:space="preserve">
-    <value>2. Apply Theme to Launcher</value>
-  </data>
-  <data name="BadFolder" xml:space="preserve">
-    <value>I can't find the "RADS" folder in the selected directory.
-Now closing the application.</value>
-  </data>
-  <data name="Cancel" xml:space="preserve">
-    <value>Cancel</value>
-  </data>
-  <data name="CantCreateDLDir" xml:space="preserve">
-    <value>Can't create the temporary download directory</value>
-  </data>
-  <data name="ChooseDownload" xml:space="preserve">
-    <value>Choose a theme to Download : </value>
-  </data>
-  <data name="ConnectionError" xml:space="preserve">
-    <value>Connection Error</value>
-  </data>
-  <data name="ConnectionMessage" xml:space="preserve">
-    <value>Can't download manifest file, please check your internet connection</value>
-  </data>
-  <data name="Download" xml:space="preserve">
-    <value>Download !</value>
-  </data>
-  <data name="DownloadBackground" xml:space="preserve">
-    <value>1. Download Animation Files</value>
-  </data>
-  <data name="DownloadError" xml:space="preserve">
-    <value>Download Error</value>
-  </data>
-  <data name="DownloadFailed" xml:space="preserve">
-    <value>Failed to download the Theme Archive.
-It can be due to one of the following problems :
-- The Checksum verification failed (to retry without checking click Yes)
-- You are not connected to the internet or cannot access dl.dropboxusercontent.com
-- The destination directory is write-protected or your disk is full
-Retry ?</value>
-  </data>
-  <data name="DownloadSuccess" xml:space="preserve">
-    <value>Download Complete !</value>
-  </data>
-  <data name="DownloadSucceeded" xml:space="preserve">
-    <value>Theme Downloaded Successfully</value>
-  </data>
-  <data name="Error" xml:space="preserve">
-    <value>Error</value>
-  </data>
-  <data name="FindLolLauncher" xml:space="preserve">
-    <value>Find League of Legends Launcher (lol.launcher.exe)</value>
-  </data>
-  <data name="ApplyTheme" xml:space="preserve">
-    <value>Apply !</value>
-  </data>
-  <data name="DisplayUnknown" xml:space="preserve">
-    <value>Display Unknown Themes (use at your own risks)</value>
-  </data>
-  <data name="ForceExtraction" xml:space="preserve">
-    <value>Force Extraction for themes already present</value>
-  </data>
-  <data name="SelectTheme" xml:space="preserve">
-    <value>Select a Theme to apply : </value>
-  </data>
   <data name="About" xml:space="preserve">
-    <value>About</value>
+    <value>A Propos</value>
+  </data>
+  <data name="ApplyBackground" xml:space="preserve">
+    <value>2. Appliquer le Thème au Lanceur</value>
   </data>
   <data name="ApplySettingsError" xml:space="preserve">
-    <value>Could not read/write the settings file.
-Please check that you can read/write the following file : 
+    <value>Impossible de lire/écrire le fichier de configuration
+Merci de vérifier que vous pouvez lire/écrire le fichier suivant :
 {0}{1}</value>
+  </data>
+  <data name="ApplyTheme" xml:space="preserve">
+    <value>Appliquer !</value>
+  </data>
+  <data name="BadFolder" xml:space="preserve">
+    <value>Impossible de trouver le dossier "RADS" dans le dossier sélectionné.
+L'application va maintenant se fermer.</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="CantCreateDLDir" xml:space="preserve">
+    <value>Impossible de créer le dossier de téléchargement</value>
+  </data>
+  <data name="ChooseDownload" xml:space="preserve">
+    <value>Choisissez un Thème à télécharger</value>
+  </data>
+  <data name="ConnectionError" xml:space="preserve">
+    <value>Erreur de Connexion</value>
+  </data>
+  <data name="ConnectionMessage" xml:space="preserve">
+    <value>Impossible de télécharger le fichier manifeste, merci de vérifier votre connexion internet</value>
+  </data>
+  <data name="DisplayUnknown" xml:space="preserve">
+    <value>Afficher les Thèmes Inconnus (à utiliser a vos risques et périls)</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>Télécharger !</value>
+  </data>
+  <data name="DownloadBackground" xml:space="preserve">
+    <value>1. Télécharger les Thèmes</value>
+  </data>
+  <data name="DownloadError" xml:space="preserve">
+    <value>Erreur de téléchargement</value>
+  </data>
+  <data name="DownloadFailed" xml:space="preserve">
+    <value>Echec du téléchargement de l'archive du Thème.
+Cela peut être dû à l'une des raisons suivantes :
+- La vérification de la somme de contrôle à échoué (pour réessayer sans cliquez Oui)
+- Vous n'êtes pas connecté à internet ou ne pouvez pas accéder à dl.dropboxusercontent.com
+- Le répertoire de destination est protégé contre l'écriture ou votre disque est plein
+Réessayer ?</value>
+  </data>
+  <data name="DownloadSucceeded" xml:space="preserve">
+    <value>Thème téléchargé avec Succès</value>
+  </data>
+  <data name="DownloadSuccess" xml:space="preserve">
+    <value>Téléchargement terminé</value>
   </data>
   <data name="Editor" xml:space="preserve">
-    <value>Editor : </value>
+    <value>Editeur: </value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Erreur</value>
   </data>
   <data name="ExtractionError" xml:space="preserve">
-    <value>Couldn't extract the theme.
-Please check that you have the rights to write in the following directory : 
+    <value>Echec lors de l'extraction du Thème.
+Merci de vérifier que vous avez les droits d'écrire dans le répertoire suivant :
 {0}{1}</value>
   </data>
-  <data name="License" xml:space="preserve">
-    <value>License : </value>
+  <data name="FindLolLauncher" xml:space="preserve">
+    <value>Trouvez le Lanceur League of Legends (lol.launcher.exe)</value>
   </data>
-  <data name="MainTitle" xml:space="preserve">
-    <value>League of Legends Animation Changer</value>
+  <data name="ForceExtraction" xml:space="preserve">
+    <value>Forcer l'extraction pour les Thèmes déjà présents</value>
+  </data>
+  <data name="License" xml:space="preserve">
+    <value>Licence :</value>
   </data>
   <data name="SaveConfigError" xml:space="preserve">
-    <value>Coudn't save config file.
-Please check that you can write in the application directory.</value>
+    <value>Echec de l'enregistrement du fichier de configuration
+Merci de vérifier que vous pouvez écrire dans le répertoire de l'application</value>
   </data>
   <data name="SettingsBackupError" xml:space="preserve">
-    <value>Could not backup your original Theme Settings File.
-Do you want to continue anyway ?</value>
+    <value>Echec de la sauvegarde the vode fichier de configuration de theme original.
+Voulez-vous continuer quand même ?</value>
+  </data>
+  <data name="SelectTheme" xml:space="preserve">
+    <value>Sélectionnez un Thème à appliquer :</value>
   </data>
   <data name="Sources" xml:space="preserve">
     <value>Sources :</value>
+  </data>
+  <data name="MainTitle" xml:space="preserve">
+    <value>League of Legends Animation Changer</value>
   </data>
 </root>

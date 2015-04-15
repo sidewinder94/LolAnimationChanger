@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Globalization;
 using System.IO;
+using System.IO.Compression;
 using System.Net;
 using System.Security.Cryptography;
 using System.Text;
@@ -13,7 +14,7 @@ using Utils.Text;
 
 namespace LolAnimationChanger.Data
 {
-    //Never Instantiated explicitely, but instancited by JSON Deserialization
+    //Never Instantiated explicitely, but instantiated by JSON Deserialization
     [UsedImplicitly]
     public class LoginScreen
     {
@@ -50,8 +51,9 @@ namespace LolAnimationChanger.Data
                 {
                     Directory.CreateDirectory(BasePath);
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
+                    Console.WriteLine(e);
                     MessageBox.Show(Strings.CantCreateDLDir, Strings.Error, MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
@@ -63,7 +65,6 @@ namespace LolAnimationChanger.Data
                 wc.DownloadFileAsync(new Uri(Properties.Resources.RootAddress + Filename), BasePath + Filename);
             }
         }
-
 
         public Boolean CheckIntegrity()
         {
@@ -84,6 +85,7 @@ namespace LolAnimationChanger.Data
             }
             catch (Exception e)
             {
+                Console.WriteLine(e);
                 return false;
             }
             finally
@@ -92,6 +94,69 @@ namespace LolAnimationChanger.Data
                 {
                     stream.Close();
                 }
+            }
+
+        }
+
+        public Boolean Extract()
+        {
+            try
+            {
+                ZipFile.ExtractToDirectory(String.Format("{0}{1}", BasePath, Filename),
+                    String.Format("{0}{1}", Configuration.GamePath,
+                        Properties.Resources.ThemeDirPath));
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
+        }
+
+        public Boolean Apply()
+        {
+            var themeSettingsFilePath = String.Format("{0}{1}", Configuration.GamePath,
+                Properties.Resources.ThemeConfigFile);
+
+            if (!File.Exists(String.Format("{0}.bak", themeSettingsFilePath)))
+            {
+                try
+                {
+                    File.Copy(themeSettingsFilePath, String.Format("{0}.bak", themeSettingsFilePath));
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    var result = MessageBox.Show(Strings.SettingsBackupError, Strings.Error, MessageBoxButton.YesNo,
+                        MessageBoxImage.Exclamation, MessageBoxResult.No);
+                    if (result == MessageBoxResult.No)
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            try
+            {
+                String config = File.ReadAllText(themeSettingsFilePath)
+                    .RegExpReplace(@"(themeConfig=)(?:.*)", String.Format(@"$1{0}", Filename.Replace(".zip", "")));
+
+                File.WriteAllText(themeSettingsFilePath, config);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                MessageBox.Show(String.Format(Strings.ApplySettingsError,
+                                              Configuration.GamePath,
+                                              Properties.Resources.ThemeConfigFile),
+                                Strings.Error,
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Error);
+                return false;
             }
 
         }
@@ -106,10 +171,8 @@ namespace LolAnimationChanger.Data
         /// </returns>
         public override string ToString()
         {
-            if (NameFr.IsEmpty())
-            {
-                return Name; ;
-            }
+            if (NameFr.IsEmpty()) return Name;
+
             return CultureInfo.CurrentCulture.Name.StartsWith("fr", StringComparison.InvariantCultureIgnoreCase)
                     ? NameFr
                     : Name;

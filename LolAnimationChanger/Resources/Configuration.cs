@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
-using LolAnimationChanger.Annotations;
+using System.Windows;
+using LolAnimationChanger.Resources.Lang;
 using Microsoft.Win32;
 using Newtonsoft.Json;
 
@@ -11,7 +12,18 @@ namespace LolAnimationChanger.Resources
     {
         public static void Save(String path = "config.json")
         {
-            File.WriteAllText(path, JsonConvert.SerializeObject(GetInstance()._dataHolder));
+            try
+            {
+                File.WriteAllText(path, JsonConvert.SerializeObject(GetInstance()._dataHolder));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                MessageBox.Show(Strings.SaveConfigError,
+                                Strings.Error,
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Error);
+            }
         }
 
         public static void Load(String path = "config.json")
@@ -22,7 +34,7 @@ namespace LolAnimationChanger.Resources
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex);
                 GetInstance()._dataHolder = new DataHolder();
                 String found =
                     (String)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Riot Games\League of Legends", "Path",
@@ -60,7 +72,7 @@ namespace LolAnimationChanger.Resources
 
         private Configuration()
         {
-
+            _dataHolder = new DataHolder();
         }
 
         private static class Holder
@@ -83,10 +95,5 @@ namespace LolAnimationChanger.Resources
 
             }
         }
-
-
-
-
-
     }
 }

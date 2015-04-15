@@ -55,6 +55,8 @@ namespace LolAnimationChanger
 
         public LoginScreen DownloadScreen { get; set; }
 
+        public LoginScreen SelectedTheme { get; set; }
+
         public IEnumerable<LoginScreen> AvailableScreens
         {
             get
@@ -151,7 +153,22 @@ namespace LolAnimationChanger
 
         private void ApplyButton_Click(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            if (SelectedTheme == null) return;
+
+            if (!SelectedTheme.IsExtracted || ForceExtraction)
+            {
+                if (!SelectedTheme.Extract())
+                {
+                    MessageBox.Show(String.Format(Strings.ExtractionError,
+                                                  Configuration.GamePath,
+                                                  Properties.Resources.ThemeDirPath),
+                                    Strings.Error,
+                                    MessageBoxButton.OK,
+                                    MessageBoxImage.Exclamation);
+                }
+            }
+
+            SelectedTheme.Apply();
         }
 
         #region Download Progress Handlers
@@ -276,6 +293,12 @@ namespace LolAnimationChanger
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
+
+        private void AboutMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            var about = new About();
+            about.ShowDialog();
+        }
 
 
     }

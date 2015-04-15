@@ -1,0 +1,53 @@
+﻿<Window x:Class="LolAnimationChanger.About"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:prop="clr-namespace:LolAnimationChanger.Properties"
+        xmlns:res="clr-namespace:LolAnimationChanger.Resources"
+        Title="{Binding Source={StaticResource LocalizedStrings}, Path=Locale.About, Mode=OneTime}"
+        SizeToContent="WidthAndHeight">
+    <Window.Resources>
+        <res:StringToUriConverter x:Key="StringToUri"/>
+    	<Style x:Key="LabelStyle" TargetType="{x:Type Label}">
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+    	</Style>
+        <Style TargetType="{x:Type Grid}">
+            <Setter Property="Margin" Value="10"/>
+        </Style>
+        
+    </Window.Resources>
+    <Grid>
+    	<Grid.RowDefinitions>
+    		<RowDefinition Height="Auto"/>
+    		<RowDefinition Height="60*"/>
+    		<RowDefinition Height="65*"/>
+    		<RowDefinition Height="50*"/>
+    		<RowDefinition Height="48*"/>
+    	</Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+
+        </Grid.ColumnDefinitions>
+        <Label Grid.Row="0" Grid.Column="0" Content="{Binding Source={StaticResource LocalizedStrings}, Path=Locale.License, Mode=OneTime}"  Style="{StaticResource LabelStyle}"/>
+        <TextBlock Grid.Row="0" Grid.Column="1" VerticalAlignment="Center">
+                <Hyperlink NavigateUri="{Binding Converter={StaticResource StringToUri}, Mode=OneTime, Source={x:Static prop:Resources.LicenseUrl}}" RequestNavigate="Hyperlink_OnRequestNavigate">
+                    <x:Static Member="prop:Resources.LicenseUrl"/>
+                </Hyperlink>
+            </TextBlock>
+        <Label Grid.Row="1" Grid.Column="0" Content="{Binding Source={StaticResource LocalizedStrings}, Path=Locale.Sources, Mode=OneTime}" Style="{StaticResource LabelStyle}"/>
+        <TextBlock Grid.Row="1" Grid.Column="1" VerticalAlignment="Center">
+                <Hyperlink NavigateUri="{Binding Converter={StaticResource StringToUri}, Mode=OneTime, Source={x:Static prop:Resources.SourceUrl}}" RequestNavigate="Hyperlink_OnRequestNavigate">
+                    <x:Static Member="prop:Resources.SourceUrl"/>
+                </Hyperlink>
+            </TextBlock>
+        <Label Grid.Row="2" Grid.Column="0" Content="{Binding Source={StaticResource LocalizedStrings}, Path=Locale.Editor, Mode=OneTime}" Style="{StaticResource LabelStyle}"/>
+        <TextBlock Grid.Row="2" Grid.Column="1" VerticalAlignment="Center">
+                <Hyperlink NavigateUri="{Binding Converter={StaticResource StringToUri}, Mode=OneTime, Source={x:Static prop:Resources.EditorUrl}}" RequestNavigate="Hyperlink_OnRequestNavigate">
+                    <x:Static Member="prop:Resources.Editor"/>
+                </Hyperlink>
+            </TextBlock>
+            
+
+    </Grid>
+</Window>

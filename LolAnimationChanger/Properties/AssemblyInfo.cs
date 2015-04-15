@@ -7,12 +7,12 @@ using System.Windows;
 // Les informations générales relatives à un assembly dépendent de 
 // l'ensemble d'attributs suivant. Changez les valeurs de ces attributs pour modifier les informations
 // associées à un assembly.
-[assembly: AssemblyTitle("LolAnimationChanger")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("League of Legends Animtion Changer")]
+[assembly: AssemblyDescription("Permet le changement de thème pour le launcher de League of Legends")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("LolAnimationChanger")]
-[assembly: AssemblyCopyright("Copyright ©  2015")]
+[assembly: AssemblyCompany("Sidewinder94")]
+[assembly: AssemblyProduct("League of Legends Animtion Changer")]
+[assembly: AssemblyCopyright("Copyright ©  2015, i am not affiliated with Riot Games, Leagie of Legends is a trademark of Riot Games")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

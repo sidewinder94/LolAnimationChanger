@@ -117,12 +117,24 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Editor" xml:space="preserve">
+    <value>Sidewinder94</value>
+  </data>
+  <data name="EditorUrl" xml:space="preserve">
+    <value>https://github.com/sidewinder94</value>
+  </data>
+  <data name="LicenseUrl" xml:space="preserve">
+    <value>https://raw.githubusercontent.com/sidewinder94/LolAnimationChanger/master/LICENSE</value>
+  </data>
   <data name="ManifestName" xml:space="preserve">
     <value>manifest.json</value>
   </data>
   <data name="RootAddress" xml:space="preserve">
     <value>https://dl.dropboxusercontent.com/u/42390504/LolAnimationChanger/</value>
     <comment>https://googledrive.com/host/0B2MpshTpJ88FfjEyNXM1VFpOWF9KanNNb21vODNfb1BxeDIzcFNwUGliNThGMTI1YzQwanc/</comment>
+  </data>
+  <data name="SourceUrl" xml:space="preserve">
+    <value>https://github.com/sidewinder94/LolAnimationChanger</value>
   </data>
   <data name="ThemeConfigFile" xml:space="preserve">
     <value>RADS\projects\lol_air_client\releases\0.0.1.139\deploy\theme.properties</value>

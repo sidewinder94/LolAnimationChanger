@@ -61,11 +61,31 @@ namespace LolAnimationChanger.Resources.Lang {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à 2. Apply Background to Launcher.
+        ///   Recherche une chaîne localisée semblable à About.
+        /// </summary>
+        public static string About {
+            get {
+                return ResourceManager.GetString("About", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à 2. Apply Theme to Launcher.
         /// </summary>
         public static string ApplyBackground {
             get {
                 return ResourceManager.GetString("ApplyBackground", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Could not read/write the settings file.
+        ///Please check that you can read/write the following file : 
+        ///{0}{1}.
+        /// </summary>
+        public static string ApplySettingsError {
+            get {
+                return ResourceManager.GetString("ApplySettingsError", resourceCulture);
             }
         }
         
@@ -170,10 +190,10 @@ namespace LolAnimationChanger.Resources.Lang {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Failed to download the Login Screen Archive.
+        ///   Recherche une chaîne localisée semblable à Failed to download the Theme Archive.
         ///It can be due to one of the following problems :
         ///- The Checksum verification failed (to retry without checking click Yes)
-        ///- You are not connected to the internet or cannot access googledrive.com
+        ///- You are not connected to the internet or cannot access dl.dropboxusercontent.com
         ///- The destination directory is write-protected or your disk is full
         ///Retry ?.
         /// </summary>
@@ -184,7 +204,7 @@ namespace LolAnimationChanger.Resources.Lang {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Login Screen Downloaded Successfully.
+        ///   Recherche une chaîne localisée semblable à Theme Downloaded Successfully.
         /// </summary>
         public static string DownloadSucceeded {
             get {
@@ -202,11 +222,31 @@ namespace LolAnimationChanger.Resources.Lang {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Editor : .
+        /// </summary>
+        public static string Editor {
+            get {
+                return ResourceManager.GetString("Editor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Error.
         /// </summary>
         public static string Error {
             get {
                 return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Couldn&apos;t extract the theme.
+        ///Please check that you have the rights to write in the following directory : 
+        ///{0}{1}.
+        /// </summary>
+        public static string ExtractionError {
+            get {
+                return ResourceManager.GetString("ExtractionError", resourceCulture);
             }
         }
         
@@ -229,11 +269,58 @@ namespace LolAnimationChanger.Resources.Lang {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à License : .
+        /// </summary>
+        public static string License {
+            get {
+                return ResourceManager.GetString("License", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à League of Legends Animation Changer.
+        /// </summary>
+        public static string MainTitle {
+            get {
+                return ResourceManager.GetString("MainTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Coudn&apos;t save config file.
+        ///Please check that you can write in the application directory..
+        /// </summary>
+        public static string SaveConfigError {
+            get {
+                return ResourceManager.GetString("SaveConfigError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Select a Theme to apply : .
         /// </summary>
         public static string SelectTheme {
             get {
                 return ResourceManager.GetString("SelectTheme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Could not backup your original Theme Settings File.
+        ///Do you want to continue anyway ?.
+        /// </summary>
+        public static string SettingsBackupError {
+            get {
+                return ResourceManager.GetString("SettingsBackupError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Sources :.
+        /// </summary>
+        public static string Sources {
+            get {
+                return ResourceManager.GetString("Sources", resourceCulture);
             }
         }
     }
