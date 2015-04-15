@@ -32,3 +32,5 @@ As this project is fairly recent, i only have the following themes (the one that
 - Teemo Omega Squad
 - Summoner's Rift
 - Haunted Zyra
+
+To submit new themes please open an issue to let me know. I'll give the instructions to package them correctly.
