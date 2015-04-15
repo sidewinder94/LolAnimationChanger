@@ -23,6 +23,7 @@ namespace LolAnimationChanger.Data
         public String NameFr;
         public String Filename;
         public String SHA1;
+        public String RequiredResources = ",lolBrand,parchment";
 
         public Boolean IsExtracted
         {
@@ -141,7 +142,7 @@ namespace LolAnimationChanger.Data
             try
             {
                 String config = File.ReadAllText(themeSettingsFilePath)
-                    .RegExpReplace(@"(themeConfig=)(?:.*)", String.Format(@"$1{0}", Filename.Replace(".zip", "")));
+                    .RegExpReplace(@"(themeConfig=)(?:.*)", String.Format(@"$1{0}{1}", Filename.Replace(".zip", ""), RequiredResources));
 
                 File.WriteAllText(themeSettingsFilePath, config);
 
