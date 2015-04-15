@@ -36,6 +36,7 @@ namespace LolAnimationChanger
         private DateTime _lastUpdate;
         private long _lastBytes = 0;
         private Boolean _displayUnkown;
+        private Boolean _forceExtraction;
 
         public Boolean DownloadEnabled
         {
@@ -111,7 +112,18 @@ namespace LolAnimationChanger
             }
         }
 
-        public Boolean ForceExtraction { get; set; }
+        public Boolean ForceExtraction
+        {
+            get
+            {
+                return _forceExtraction;
+            }
+            set
+            {
+                _forceExtraction = value;
+                OnPropertyChanged("AvailableScreens");
+            }
+        }
 
         public MainWindow()
         {
@@ -133,21 +145,29 @@ namespace LolAnimationChanger
 
         private IEnumerable<LoginScreen> GetAvailableLoginScreens()
         {
-            List<LoginScreen> result = LoginScreens.Where(l => l.IsDownloaded || l.IsExtracted).ToList();
-
-            if (DisplayUnknown)
+            List<LoginScreen> result;
+            if (ForceExtraction)
             {
-                var dirs = Directory.EnumerateDirectories(String.Format("{0}{1}",
-                    Configuration.GamePath, Configuration.ThemeDirPath));
-                result.AddRange(from dir in dirs
-                                where !LoginScreens.Any(l => l.Filename.Equals(String.Format("{0}.zip", dir.RegExpReplace(@"^.*\\", ""))))
-                                select new LoginScreen()
-                                {
-                                    Name = dir.RegExpReplace(@"^.*\\", ""),
-                                });
+                result = LoginScreens.Where(l => l.IsDownloaded).ToList();
             }
+            else
+            {
+                result = LoginScreens.Where(l => l.IsDownloaded || l.IsExtracted).ToList();
 
-
+                if (DisplayUnknown)
+                {
+                    var dirs = Directory.EnumerateDirectories(String.Format("{0}{1}",
+                        Configuration.GamePath, Configuration.ThemeDirPath));
+                    result.AddRange(from dir in dirs
+                                    where
+                                        !LoginScreens.Any(
+                                            l => l.Filename.Equals(String.Format("{0}.zip", dir.RegExpReplace(@"^.*\\", ""))))
+                                    select new LoginScreen()
+                                    {
+                                        Name = dir.RegExpReplace(@"^.*\\", ""),
+                                    });
+                }
+            }
             return result.OrderBy(l => l.ToString());
         }
 
@@ -168,7 +188,16 @@ namespace LolAnimationChanger
                 }
             }
 
-            SelectedTheme.Apply();
+            if (SelectedTheme.Apply())
+            {
+                MessageBox.Show(Strings.ApplySuccess, Strings.Success, MessageBoxButton.OK,
+                    MessageBoxImage.Information);
+            }
+            else
+            {
+                MessageBox.Show(Strings.ApplyFailed, Strings.Error, MessageBoxButton.OK,
+                    MessageBoxImage.Information);
+            }
         }
 
         #region Download Progress Handlers

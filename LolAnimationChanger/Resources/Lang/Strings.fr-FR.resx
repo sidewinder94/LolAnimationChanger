@@ -213,4 +213,13 @@ Voulez-vous continuer quand même ?</value>
   <data name="MainTitle" xml:space="preserve">
     <value>League of Legends Animation Changer</value>
   </data>
+  <data name="Success" xml:space="preserve">
+    <value>Réussi</value>
+  </data>
+  <data name="ApplyFailed" xml:space="preserve">
+    <value>Echec de l'application d Thème sélectionné</value>
+  </data>
+  <data name="ApplySuccess" xml:space="preserve">
+    <value>Réussite de l'application du Thème sélectionné.</value>
+  </data>
 </root>

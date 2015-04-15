@@ -79,6 +79,15 @@ namespace LolAnimationChanger.Resources.Lang {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Failed to apply selected theme.
+        /// </summary>
+        public static string ApplyFailed {
+            get {
+                return ResourceManager.GetString("ApplyFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Could not read/write the settings file.
         ///Please check that you can read/write the following file : 
         ///{0}{1}.
@@ -86,6 +95,15 @@ namespace LolAnimationChanger.Resources.Lang {
         public static string ApplySettingsError {
             get {
                 return ResourceManager.GetString("ApplySettingsError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Successfully applyed selected theme.
+        /// </summary>
+        public static string ApplySuccess {
+            get {
+                return ResourceManager.GetString("ApplySuccess", resourceCulture);
             }
         }
         
@@ -321,6 +339,15 @@ namespace LolAnimationChanger.Resources.Lang {
         public static string Sources {
             get {
                 return ResourceManager.GetString("Sources", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Success.
+        /// </summary>
+        public static string Success {
+            get {
+                return ResourceManager.GetString("Success", resourceCulture);
             }
         }
     }
