@@ -175,7 +175,7 @@ namespace LolAnimationChanger.Data
             if (NameFr.IsEmpty()) return Name;
 
             return CultureInfo.CurrentCulture.Name.StartsWith("fr", StringComparison.InvariantCultureIgnoreCase)
-                    ? NameFr
+                    ? NameFr.ReEncodeString("iso-8859-1", "utf-8")
                     : Name;
         }
 
