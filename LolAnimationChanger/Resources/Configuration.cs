@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
+using System.Linq;
 using System.Windows;
 using LolAnimationChanger.Resources.Lang;
 using Microsoft.Win32;
 using Newtonsoft.Json;
+using Utils.Text;
 
 namespace LolAnimationChanger.Resources
 {
@@ -58,6 +60,36 @@ namespace LolAnimationChanger.Resources
         {
             get { return GetInstance()._dataHolder.PathSet; }
             set { GetInstance()._dataHolder.PathSet = value; }
+        }
+
+        public static String ThemeConfigFile
+        {
+            get { return String.Format(Properties.Resources.ThemeConfigFile, GetLauncherVersion()); }
+        }
+
+        public static String ThemeDirPath
+        {
+            get
+            {
+                return String.Format(Properties.Resources.ThemeDirPath, GetLauncherVersion());
+            }
+        }
+
+
+
+        private String _launcherVersion = null;
+        private static String GetLauncherVersion()
+        {
+            if (!GetInstance()._launcherVersion.IsEmpty()) return GetInstance()._launcherVersion;
+
+            var dirs = Directory.EnumerateDirectories(String.Format("{0}{1}", GamePath, Properties.Resources.ReleasesPath));
+            GetInstance()._launcherVersion = dirs.Select(d =>
+            {
+                Version v;
+                Version.TryParse(d.RegExpReplace(@".*\\", ""), out v);
+                return v;
+            }).OrderByDescending(v => v).First().ToString();
+            return GetInstance()._launcherVersion;
         }
 
         #region Singleton Implementation

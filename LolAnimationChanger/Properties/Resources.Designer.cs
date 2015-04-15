@@ -97,6 +97,15 @@ namespace LolAnimationChanger.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à RADS\projects\lol_air_client\releases\.
+        /// </summary>
+        public static string ReleasesPath {
+            get {
+                return ResourceManager.GetString("ReleasesPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à https://dl.dropboxusercontent.com/u/42390504/LolAnimationChanger/.
         /// </summary>
         public static string RootAddress {
@@ -115,7 +124,7 @@ namespace LolAnimationChanger.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à RADS\projects\lol_air_client\releases\0.0.1.139\deploy\theme.properties.
+        ///   Recherche une chaîne localisée semblable à RADS\projects\lol_air_client\releases\{0}\deploy\theme.properties.
         /// </summary>
         public static string ThemeConfigFile {
             get {
@@ -124,7 +133,7 @@ namespace LolAnimationChanger.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à RADS\projects\lol_air_client\releases\0.0.1.139\deploy\mod\lgn\themes\.
+        ///   Recherche une chaîne localisée semblable à RADS\projects\lol_air_client\releases\{0}\deploy\mod\lgn\themes\.
         /// </summary>
         public static string ThemeDirPath {
             get {

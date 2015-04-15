@@ -129,6 +129,9 @@
   <data name="ManifestName" xml:space="preserve">
     <value>manifest.json</value>
   </data>
+  <data name="ReleasesPath" xml:space="preserve">
+    <value>RADS\projects\lol_air_client\releases\</value>
+  </data>
   <data name="RootAddress" xml:space="preserve">
     <value>https://dl.dropboxusercontent.com/u/42390504/LolAnimationChanger/</value>
     <comment>https://googledrive.com/host/0B2MpshTpJ88FfjEyNXM1VFpOWF9KanNNb21vODNfb1BxeDIzcFNwUGliNThGMTI1YzQwanc/</comment>
@@ -137,9 +140,9 @@
     <value>https://github.com/sidewinder94/LolAnimationChanger</value>
   </data>
   <data name="ThemeConfigFile" xml:space="preserve">
-    <value>RADS\projects\lol_air_client\releases\0.0.1.139\deploy\theme.properties</value>
+    <value>RADS\projects\lol_air_client\releases\{0}\deploy\theme.properties</value>
   </data>
   <data name="ThemeDirPath" xml:space="preserve">
-    <value>RADS\projects\lol_air_client\releases\0.0.1.139\deploy\mod\lgn\themes\</value>
+    <value>RADS\projects\lol_air_client\releases\{0}\deploy\mod\lgn\themes\</value>
   </data>
 </root>

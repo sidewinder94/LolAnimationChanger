@@ -138,7 +138,7 @@ namespace LolAnimationChanger
             if (DisplayUnknown)
             {
                 var dirs = Directory.EnumerateDirectories(String.Format("{0}{1}",
-                    Configuration.GamePath, Properties.Resources.ThemeDirPath));
+                    Configuration.GamePath, Configuration.ThemeDirPath));
                 result.AddRange(from dir in dirs
                                 where !LoginScreens.Any(l => l.Filename.Equals(String.Format("{0}.zip", dir.RegExpReplace(@"^.*\\", ""))))
                                 select new LoginScreen()
@@ -161,7 +161,7 @@ namespace LolAnimationChanger
                 {
                     MessageBox.Show(String.Format(Strings.ExtractionError,
                                                   Configuration.GamePath,
-                                                  Properties.Resources.ThemeDirPath),
+                                                  Configuration.ThemeDirPath),
                                     Strings.Error,
                                     MessageBoxButton.OK,
                                     MessageBoxImage.Exclamation);

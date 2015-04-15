@@ -30,7 +30,7 @@ namespace LolAnimationChanger.Data
             {
                 return Directory.Exists(String.Format("{0}{1}{2}",
                     Configuration.GamePath,
-                    Properties.Resources.ThemeDirPath,
+                    Configuration.ThemeDirPath,
                     Filename.Replace(".zip", "")));
             }
         }
@@ -104,7 +104,7 @@ namespace LolAnimationChanger.Data
             {
                 ZipFile.ExtractToDirectory(String.Format("{0}{1}", BasePath, Filename),
                     String.Format("{0}{1}", Configuration.GamePath,
-                        Properties.Resources.ThemeDirPath));
+                        Configuration.ThemeDirPath));
 
                 return true;
             }
@@ -118,7 +118,7 @@ namespace LolAnimationChanger.Data
         public Boolean Apply()
         {
             var themeSettingsFilePath = String.Format("{0}{1}", Configuration.GamePath,
-                Properties.Resources.ThemeConfigFile);
+                Configuration.ThemeConfigFile);
 
             if (!File.Exists(String.Format("{0}.bak", themeSettingsFilePath)))
             {
@@ -152,7 +152,7 @@ namespace LolAnimationChanger.Data
                 Console.WriteLine(ex);
                 MessageBox.Show(String.Format(Strings.ApplySettingsError,
                                               Configuration.GamePath,
-                                              Properties.Resources.ThemeConfigFile),
+                                              Configuration.ThemeConfigFile),
                                 Strings.Error,
                                 MessageBoxButton.OK,
                                 MessageBoxImage.Error);
