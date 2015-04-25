@@ -222,4 +222,7 @@ Voulez-vous continuer quand même ?</value>
   <data name="ApplySuccess" xml:space="preserve">
     <value>Réussite de l'application du Thème sélectionné.</value>
   </data>
+  <data name="RunAs" xml:space="preserve">
+    <value>Relancer en tant qu'administrateur</value>
+  </data>
 </root>

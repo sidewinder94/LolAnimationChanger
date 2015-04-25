@@ -222,4 +222,7 @@ Do you want to continue anyway ?</value>
   <data name="ApplyFailed" xml:space="preserve">
     <value>Failed to apply selected theme</value>
   </data>
+  <data name="RunAs" xml:space="preserve">
+    <value>Run As Admin</value>
+  </data>
 </root>

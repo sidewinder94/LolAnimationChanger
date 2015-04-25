@@ -73,6 +73,7 @@
                 <CheckBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Content="{Binding Source={StaticResource LocalizedStrings}, Path=Locale.ForceExtraction, Mode=OneTime}" Style="{StaticResource CheckBoxStyle}" IsChecked="{Binding ForceExtraction}"/>
                 <Label Grid.Row="2" Grid.Column="0" Content="{Binding Source={StaticResource LocalizedStrings}, Path=Locale.SelectTheme, Mode=OneTime}"/>
                 <ComboBox Grid.Row="2" Grid.Column="1" Style="{StaticResource ComboStyle}" ItemsSource="{Binding AvailableScreens, Mode=OneWay}" SelectedItem="{Binding SelectedTheme}"/>
+                <Button Grid.Row="3" Grid.Column="0" Style="{StaticResource ButtonStyle}" Content="{Binding Source={StaticResource LocalizedStrings}, Path=Locale.RunAs, Mode=OneTime}" Click="RunAsAdmin_Click" HorizontalAlignment="Left" Margin="0,0,10,0"/>
                 <Button Grid.Row="3" Grid.Column="1" Style="{StaticResource ButtonStyle}" Content="{Binding Source={StaticResource LocalizedStrings}, Path=Locale.ApplyTheme, Mode=OneTime}" Click="ApplyButton_Click"/>
             </Grid>
         </GroupBox>

@@ -305,6 +305,15 @@ namespace LolAnimationChanger.Resources.Lang {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Run As Admin.
+        /// </summary>
+        public static string RunAs {
+            get {
+                return ResourceManager.GetString("RunAs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Coudn&apos;t save config file.
         ///Please check that you can write in the application directory..
         /// </summary>
