@@ -29,6 +29,8 @@ namespace LolAnimationChanger.Data
         {
             get
             {
+                if (Filename == null && SHA1 == null) return true;
+
                 return Directory.Exists(String.Format("{0}{1}{2}",
                     Configuration.GamePath,
                     Configuration.ThemeDirPath,
@@ -166,8 +168,11 @@ namespace LolAnimationChanger.Data
 
             try
             {
+
+                var themeDirName = (Filename == null && SHA1 == null) ? Name : Filename.Replace(".zip", "");
+
                 String config = File.ReadAllText(themeSettingsFilePath)
-                    .RegExpReplace(@"(themeConfig=)(?:.*)", String.Format(@"$1{0}{1}", Filename.Replace(".zip", ""), RequiredResources));
+                    .RegExpReplace(@"(themeConfig=)(?:.*)", String.Format(@"$1{0}{1}", themeDirName, RequiredResources));
 
                 File.WriteAllText(themeSettingsFilePath, config);
 
