@@ -29,16 +29,16 @@
             <Setter Property="Margin" Value="0,5" />
         </Style>
     </Window.Resources>
+    <Window.ContextMenu>
+        <ContextMenu>
+            <MenuItem Click="AboutMenuItem_Click" Header="{Binding Source={StaticResource LocalizedStrings}, Path=Locale.About, Mode=OneTime}"/>
+        </ContextMenu>
+    </Window.ContextMenu>
     <Grid VerticalAlignment="Top">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Grid.ContextMenu>
-            <ContextMenu>
-                <MenuItem Click="AboutMenuItem_Click" Header="{Binding Source={StaticResource LocalizedStrings}, Path=Locale.About, Mode=OneTime}"/>
-            </ContextMenu>    
-        </Grid.ContextMenu>
         <GroupBox Grid.Row="0" Header="{Binding Source={StaticResource LocalizedStrings}, Path=Locale.DownloadBackground, Mode=OneTime}">
             <Grid>
                 <Grid.ColumnDefinitions>
