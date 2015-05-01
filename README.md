@@ -27,10 +27,13 @@ None.... Until now
 If you find any issues or want to ask for a functionality, please do so unsing the github issue tracker
 
 #Theme Submission
-As this project is fairly recent, i only have the following themes (the one that were in Launcher version 0.0.1.139) :
+As this project is fairly recent, i only have the following themes (the one that were in Launcher version 0.0.1.139 and later) :
 - April's Fool 2015
 - Teemo Omega Squad
 - Summoner's Rift
 - Haunted Zyra
+- Bard
+- Jinx Lunar Revel
+- Quinn (reconstructed from the old SWF & Soundcloud track)
 
 To submit new themes please open an issue to let me know. I'll give the instructions to package them correctly.
