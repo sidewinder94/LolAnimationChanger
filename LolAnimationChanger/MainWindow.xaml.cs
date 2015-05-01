@@ -161,7 +161,7 @@ namespace LolAnimationChanger
                     result.AddRange(from dir in dirs
                                     where
                                         !LoginScreens.Any(
-                                            l => l.Filename.Equals(String.Format("{0}.zip", dir.RegExpReplace(@"^.*\\", "")))) && !dir.Equals("parchment")
+                                            l => l.Filename.Equals(String.Format("{0}.zip", dir.RegExpReplace(@"^.*\\", "")))) && !dir.Contains("parchment")
                                     select new LoginScreen()
                                     {
                                         Name = dir.RegExpReplace(@"^.*\\", ""),
@@ -337,7 +337,7 @@ namespace LolAnimationChanger
             result.AddRange(from dir in dirs
                             where
                                 !LoginScreens.Any(
-                                    l => l.Filename.Equals(String.Format("{0}.zip", dir.RegExpReplace(@"^.*\\", "")))) //&& !dir.Contains("parchment")
+                                    l => l.Filename.Equals(String.Format("{0}.zip", dir.RegExpReplace(@"^.*\\", "")))) && !dir.Contains("parchment")
                             select new LoginScreen()
                             {
                                 Name = dir.RegExpReplace(@"^.*\\", ""),
