@@ -17,7 +17,7 @@ namespace LolAnimationChanger
     /// <summary>
     /// Logique d'interaction pour Packager.xaml
     /// </summary>
-    public partial class Packager : Window, INotifyPropertyChanged
+    public partial class Packager : INotifyPropertyChanged
     {
 
         private List<LoginScreen> _unkownLoginScreens = new List<LoginScreen>();
@@ -44,7 +44,7 @@ namespace LolAnimationChanger
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             var handler = PropertyChanged;
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));

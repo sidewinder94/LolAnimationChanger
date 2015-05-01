@@ -13,8 +13,8 @@ using LolAnimationChanger.Resources;
 using LolAnimationChanger.Resources.Lang;
 using Microsoft.Win32;
 using Newtonsoft.Json;
-using Utils.Text;
 using Utils.Misc;
+using Utils.Text;
 
 namespace LolAnimationChanger
 {

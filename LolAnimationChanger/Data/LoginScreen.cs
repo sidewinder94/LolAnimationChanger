@@ -23,7 +23,7 @@ namespace LolAnimationChanger.Data
         public String NameFr { get; set; }
         public String Filename { get; set; }
         public String SHA1 { get; set; }
-        public String RequiredResources = ",lolBrand,parchment";
+        public const String RequiredResources = ",lolBrand,parchment";
         public Boolean ToExport { get; set; }
 
         public Boolean IsExtracted
@@ -170,6 +170,7 @@ namespace LolAnimationChanger.Data
             try
             {
 
+                // ReSharper disable once PossibleNullReferenceException
                 var themeDirName = (Filename == null && SHA1 == null) ? Name : Filename.Replace(".zip", "");
 
                 String config = File.ReadAllText(themeSettingsFilePath)

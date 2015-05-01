@@ -77,7 +77,7 @@ namespace LolAnimationChanger.Resources
 
 
 
-        private String _launcherVersion = null;
+        private String _launcherVersion;
         private static String GetLauncherVersion()
         {
             if (!GetInstance()._launcherVersion.IsEmpty()) return GetInstance()._launcherVersion;
@@ -97,7 +97,7 @@ namespace LolAnimationChanger.Resources
 
         private static Configuration GetInstance()
         {
-            return Configuration.Holder.Config;
+            return Holder.Config;
         }
 
 
@@ -120,12 +120,7 @@ namespace LolAnimationChanger.Resources
         {
 
             public String GamePath = "";
-            public Boolean PathSet = false;
-
-            public DataHolder()
-            {
-
-            }
+            public Boolean PathSet;
         }
     }
 }
