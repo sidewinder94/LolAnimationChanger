@@ -161,7 +161,7 @@ namespace LolAnimationChanger
                     result.AddRange(from dir in dirs
                                     where
                                         !LoginScreens.Any(
-                                            l => l.Filename.Equals(String.Format("{0}.zip", dir.RegExpReplace(@"^.*\\", ""))))
+                                            l => l.Filename.Equals(String.Format("{0}.zip", dir.RegExpReplace(@"^.*\\", "")))) && !dir.Equals("parchment")
                                     select new LoginScreen()
                                     {
                                         Name = dir.RegExpReplace(@"^.*\\", ""),
@@ -329,6 +329,27 @@ namespace LolAnimationChanger
             about.ShowDialog();
         }
 
+        private void PackNewThemesMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            var result = new List<LoginScreen>();
+            var dirs = Directory.EnumerateDirectories(String.Format("{0}{1}",
+                        Configuration.GamePath, Configuration.ThemeDirPath));
+            result.AddRange(from dir in dirs
+                            where
+                                !LoginScreens.Any(
+                                    l => l.Filename.Equals(String.Format("{0}.zip", dir.RegExpReplace(@"^.*\\", "")))) //&& !dir.Contains("parchment")
+                            select new LoginScreen()
+                            {
+                                Name = dir.RegExpReplace(@"^.*\\", ""),
+                            });
+
+
+            var packager = new Packager()
+            {
+                UnkownLoginScreens = result
+            };
+            packager.ShowDialog();
+        }
 
         private void RunAsAdmin_Click(object sender, RoutedEventArgs e)
         {

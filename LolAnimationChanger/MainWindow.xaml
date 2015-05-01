@@ -31,7 +31,11 @@
     </Window.Resources>
     <Window.ContextMenu>
         <ContextMenu>
-            <MenuItem Click="AboutMenuItem_Click" Header="{Binding Source={StaticResource LocalizedStrings}, Path=Locale.About, Mode=OneTime}"/>
+            <MenuItem Click="PackNewThemesMenuItem_Click" Header="{Binding Source={StaticResource LocalizedStrings}, Path=Locale.PackNewTheme, Mode=OneTime}">
+                <MenuItem.Icon>
+                    <Image Source="Resources/Icons/zip.png"/>
+                </MenuItem.Icon>
+            </MenuItem>
             <MenuItem Click="AboutMenuItem_Click" Header="{Binding Source={StaticResource LocalizedStrings}, Path=Locale.About, Mode=OneTime}">
                 <MenuItem.Icon>
                     <Image Source="Resources/Icons/help_about.png"/>

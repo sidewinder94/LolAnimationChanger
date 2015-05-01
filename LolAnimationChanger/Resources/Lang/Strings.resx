@@ -225,4 +225,15 @@ Do you want to continue anyway ?</value>
   <data name="RunAs" xml:space="preserve">
     <value>Run As Admin</value>
   </data>
+  <data name="PackNewTheme" xml:space="preserve">
+    <value>Pack New Theme</value>
+  </data>
+  <data name="Pack" xml:space="preserve">
+    <value>Pack !</value>
+  </data>
+  <data name="PackingError" xml:space="preserve">
+    <value>Couldn't zip the theme.
+Please check that you have the rights to write in the following directory : 
+{0}{1}</value>
+  </data>
 </root>

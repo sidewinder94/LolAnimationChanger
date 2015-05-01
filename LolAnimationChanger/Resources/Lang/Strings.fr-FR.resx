@@ -225,4 +225,15 @@ Voulez-vous continuer quand même ?</value>
   <data name="RunAs" xml:space="preserve">
     <value>Relancer en tant qu'administrateur</value>
   </data>
+  <data name="PackNewTheme" xml:space="preserve">
+    <value>Empaqueter un nouveau Thème</value>
+  </data>
+  <data name="Pack" xml:space="preserve">
+    <value>Empaqueter !</value>
+  </data>
+  <data name="PackingError" xml:space="preserve">
+    <value>Echec lors de la compression du Thème.
+Merci de vérifier que vous avez les droits d'écrire dans le répertoire suivant :
+{0}{1}</value>
+  </data>
 </root>

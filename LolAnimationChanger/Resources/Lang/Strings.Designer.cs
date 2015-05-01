@@ -305,6 +305,33 @@ namespace LolAnimationChanger.Resources.Lang {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Pack !.
+        /// </summary>
+        public static string Pack {
+            get {
+                return ResourceManager.GetString("Pack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à .
+        /// </summary>
+        public static string PackingError {
+            get {
+                return ResourceManager.GetString("PackingError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Pack New Theme.
+        /// </summary>
+        public static string PackNewTheme {
+            get {
+                return ResourceManager.GetString("PackNewTheme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Run As Admin.
         /// </summary>
         public static string RunAs {

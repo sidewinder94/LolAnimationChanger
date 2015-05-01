@@ -19,11 +19,12 @@ namespace LolAnimationChanger.Data
     public class LoginScreen
     {
         private const String BasePath = @"downloads\";
-        public String Name;
-        public String NameFr;
-        public String Filename;
-        public String SHA1;
+        public String Name { get; set; }
+        public String NameFr { get; set; }
+        public String Filename { get; set; }
+        public String SHA1 { get; set; }
         public String RequiredResources = ",lolBrand,parchment";
+        public Boolean ToExport { get; set; }
 
         public Boolean IsExtracted
         {

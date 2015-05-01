@@ -1,0 +1,38 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Resources="clr-namespace:LolAnimationChanger.Resources" x:Class="LolAnimationChanger.Packager"
+        Title="Packager" Height="300" Width="300"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}">
+    <Window.Resources>
+        <Style TargetType="{x:Type Button}" x:Key="ButtonStyle">
+            <Setter Property="Margin" Value="10, 5"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="5,2"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <ScrollViewer Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+            <ListView ItemsSource="{Binding UnkownLoginScreens}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <CheckBox IsChecked="{Binding ToExport}" VerticalAlignment="Center"/>
+                            <Label Content="{Binding Name}" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </ScrollViewer>
+        <Button Grid.Row="1" Grid.Column="1" Content="{Binding Locale.Pack, Mode=OneTime, Source={StaticResource LocalizedStrings}}" Click="ExportButton_OnClick" Style="{StaticResource ButtonStyle}"/>
+    </Grid>
+</Window>
