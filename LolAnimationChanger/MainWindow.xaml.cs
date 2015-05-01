@@ -26,15 +26,15 @@ namespace LolAnimationChanger
     /// <summary>
     /// Logique d'interaction pour MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window, INotifyPropertyChanged
+    public partial class MainWindow : INotifyPropertyChanged
     {
-        private Double _downloadProgress = 0.0d;
+        private Double _downloadProgress;
         private long _bytesPerSecond;
         private Boolean _downloadEnabled = true;
         private Visibility _downloadVisibility = Visibility.Collapsed;
         private String _downloadSpeed;
         private DateTime _lastUpdate;
-        private long _lastBytes = 0;
+        private long _lastBytes;
         private Boolean _displayUnkown;
         private Boolean _forceExtraction;
 
@@ -360,7 +360,7 @@ namespace LolAnimationChanger
             };
 
             Process.Start(startInfo);
-            this.Close();
+            Close();
         }
     }
 }
