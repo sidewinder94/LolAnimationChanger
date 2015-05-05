@@ -37,3 +37,7 @@ As this project is fairly recent, i only have the following themes (the one that
 - Quinn (reconstructed from the old SWF & Soundcloud track)
 
 To submit new themes please open an issue to let me know. I'll give the instructions to package them correctly.
+
+#Open Source Software used
+
+ [Newtonsoft's JSON.NET library](https://github.com/JamesNK/Newtonsoft.Json) 
