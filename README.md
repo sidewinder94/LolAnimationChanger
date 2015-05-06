@@ -34,7 +34,8 @@ As this project is fairly recent, i only have the following themes (the one that
 - Haunted Zyra
 - Bard
 - Jinx Lunar Revel
-- Quinn (reconstructed from the old SWF & Soundcloud track)
+- Quinn (reconstructed from the original SWF & Soundcloud track)
+- Diana (reconstructed from the original SWF & tracks)
 
 To submit new themes please open an issue to let me know. I'll give the instructions to package them correctly.
 
