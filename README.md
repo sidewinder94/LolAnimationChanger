@@ -36,6 +36,13 @@ As this project is fairly recent, i only have the following themes (the one that
 - Jinx Lunar Revel
 - Quinn (reconstructed from the original SWF & Soundcloud track)
 - Diana (reconstructed from the original SWF & tracks)
+- Kalista
+- Orianna Merveille HIvernale
+- Reksai
+- Syndra (reconstructed from the original SWF & tracks)
+- Ezreal Pulsefire (reconstructed from the original SWF & tracks)
+- Mecha Cho'Gath (reconstructed from the original SWF & tracks)
+- Jayce (reconstructed from the original SWF & tracks)
 
 To submit new themes please open an issue to let me know. I'll give the instructions to package them correctly.
 
