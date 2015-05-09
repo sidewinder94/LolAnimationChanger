@@ -244,7 +244,11 @@ namespace LolAnimationChanger
             {
                 var result = MessageBox.Show(Strings.DownloadFailed, Strings.DownloadError, MessageBoxButton.YesNo,
                     MessageBoxImage.Exclamation);
-                if (result != MessageBoxResult.Yes) return;
+                if (result != MessageBoxResult.Yes)
+                {
+                    DownloadEnabled = true;
+                    return;
+                }
                 DownloadProgress = 0.0d;
                 _lastBytes = 0;
                 DownloadScreen.Download(DownloadProgressHandler, DownloadCompletedHandler);
