@@ -12,8 +12,13 @@ namespace LolAnimationChanger.Resources
 {
     public class Configuration
     {
-        public static void Save(String path = "config.json")
+
+        private static String _path;
+
+        public static void Save(String path = null)
         {
+            if (path == null) path = _path;
+
             try
             {
                 File.WriteAllText(path, JsonConvert.SerializeObject(GetInstance()._dataHolder));
@@ -28,8 +33,11 @@ namespace LolAnimationChanger.Resources
             }
         }
 
-        public static void Load(String path = "config.json")
+        public static void Load(String path = null)
         {
+
+            if (path == null) path = _path;
+
             try
             {
                 GetInstance()._dataHolder = JsonConvert.DeserializeObject<DataHolder>(File.ReadAllText(path));
@@ -104,6 +112,12 @@ namespace LolAnimationChanger.Resources
 
         private Configuration()
         {
+            var appPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\LeagueOfLegendsAnimationChanger";
+
+            if (!Directory.Exists(appPath)) Directory.CreateDirectory(appPath);
+
+            _path = appPath + @"\config.json";
+
             _dataHolder = new DataHolder();
         }
 
