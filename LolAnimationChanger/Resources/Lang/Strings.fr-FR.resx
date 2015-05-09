@@ -236,4 +236,7 @@ Voulez-vous continuer quand même ?</value>
 Merci de vérifier que vous avez les droits d'écrire dans le répertoire suivant :
 {0}{1}</value>
   </data>
+  <data name="Admin" xml:space="preserve">
+    <value>Admin</value>
+  </data>
 </root>

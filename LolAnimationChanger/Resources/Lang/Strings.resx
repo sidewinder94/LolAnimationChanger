@@ -236,4 +236,7 @@ Do you want to continue anyway ?</value>
 Please check that you have the rights to write in the following directory : 
 {0}{1}</value>
   </data>
+  <data name="Admin" xml:space="preserve">
+    <value>Admin</value>
+  </data>
 </root>

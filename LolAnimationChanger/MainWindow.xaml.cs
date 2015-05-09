@@ -6,6 +6,8 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Runtime.CompilerServices;
+using System.Security;
+using System.Security.Principal;
 using System.Windows;
 using LolAnimationChanger.Annotations;
 using LolAnimationChanger.Data;
@@ -15,6 +17,7 @@ using Microsoft.Win32;
 using Newtonsoft.Json;
 using Utils.Misc;
 using Utils.Text;
+
 
 namespace LolAnimationChanger
 {
@@ -37,6 +40,39 @@ namespace LolAnimationChanger
         private long _lastBytes;
         private Boolean _displayUnkown;
         private Boolean _forceExtraction;
+
+
+        public String TitleString
+        {
+            get
+            {
+                if (IsNotAdmin)
+                {
+                    return Strings.MainTitle;
+                }
+                return String.Format("{0} ({1})", Strings.MainTitle,
+                    Strings.Admin);
+            }
+        }
+
+        public Boolean IsNotAdmin
+        {
+            get
+            {
+                WindowsIdentity identity = null;
+                try
+                {
+                    identity = WindowsIdentity.GetCurrent();
+                }
+                catch (SecurityException)
+                {
+                    return true;
+                }
+                if (identity == null) return true;
+
+                return !(new WindowsPrincipal(identity).IsInRole(WindowsBuiltInRole.Administrator));
+            }
+        }
 
         public Boolean DownloadEnabled
         {
@@ -129,7 +165,6 @@ namespace LolAnimationChanger
         {
             DownloadLoginScreenList();
             CheckConfiguration();
-
             InitializeComponent();
         }
 
