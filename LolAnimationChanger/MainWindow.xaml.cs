@@ -180,7 +180,7 @@ namespace LolAnimationChanger
 
         private IEnumerable<LoginScreen> GetAvailableLoginScreens()
         {
-            List<LoginScreen> result;
+            IEnumerable<LoginScreen> result;
             if (ForceExtraction)
             {
                 result = LoginScreens.Where(l => l.IsDownloaded).ToList();
@@ -193,14 +193,14 @@ namespace LolAnimationChanger
                 {
                     var dirs = Directory.EnumerateDirectories(String.Format("{0}{1}",
                         Configuration.GamePath, Configuration.ThemeDirPath));
-                    result.AddRange(from dir in dirs
-                                    where
-                                        !LoginScreens.Any(
-                                            l => l.Filename.Equals(String.Format("{0}.zip", dir.RegExpReplace(@"^.*\\", "")))) && !dir.Contains("parchment")
-                                    select new LoginScreen()
-                                    {
-                                        Name = dir.RegExpReplace(@"^.*\\", ""),
-                                    });
+                    result = result.Concat(from dir in dirs
+                                           where
+                                               !LoginScreens.Any(
+                                                   l => l.Filename.Equals(String.Format("{0}.zip", dir.RegExpReplace(@"^.*\\", "")))) && !dir.Contains("parchment")
+                                           select new LoginScreen()
+                                           {
+                                               Name = dir.RegExpReplace(@"^.*\\", ""),
+                                           });
                 }
             }
             return result.OrderBy(l => l.ToString());

@@ -26,6 +26,8 @@ namespace LolAnimationChanger.Data
         public const String RequiredResources = ",lolBrand,parchment";
         public Boolean ToExport { get; set; }
 
+        private Boolean _isDownloaded = false;
+
         public Boolean IsExtracted
         {
             get
@@ -43,12 +45,18 @@ namespace LolAnimationChanger.Data
         {
             get
             {
-                return CheckIntegrity();
+                if (_isDownloaded) return _isDownloaded;
+
+                _isDownloaded = CheckIntegrity();
+
+                return _isDownloaded;
             }
+            private set { _isDownloaded = value; }
         }
 
         public void Download(DownloadProgressChangedEventHandler progressHandler = null, AsyncCompletedEventHandler completedHandler = null)
         {
+            IsDownloaded = false;
             if (!Directory.Exists(BasePath))
             {
                 try
