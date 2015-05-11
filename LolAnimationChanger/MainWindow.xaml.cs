@@ -88,7 +88,7 @@ namespace LolAnimationChanger
             }
         }
 
-        public List<LoginScreen> LoginScreens { get; set; }
+        public IEnumerable<LoginScreen> LoginScreens { get; set; }
 
         public LoginScreen DownloadScreen { get; set; }
 
@@ -180,14 +180,16 @@ namespace LolAnimationChanger
 
         private IEnumerable<LoginScreen> GetAvailableLoginScreens()
         {
+            if (LoginScreens == null) return Enumerable.Empty<LoginScreen>();
+
             IEnumerable<LoginScreen> result;
             if (ForceExtraction)
             {
-                result = LoginScreens.Where(l => l.IsDownloaded).ToList();
+                result = LoginScreens.Where(l => l.IsDownloaded);
             }
             else
             {
-                result = LoginScreens.Where(l => l.IsDownloaded || l.IsExtracted).ToList();
+                result = LoginScreens.Where(l => l.IsDownloaded || l.IsExtracted);
 
                 if (DisplayUnknown)
                 {
@@ -299,8 +301,14 @@ namespace LolAnimationChanger
             var wc = new WebClient();
             try
             {
-                var json = wc.DownloadString(Properties.Resources.RootAddress + Properties.Resources.ManifestName);
-                LoginScreens = JsonConvert.DeserializeObject<List<LoginScreen>>(json).OrderBy(e => e.ToString()).ToList();
+                wc.DownloadStringCompleted += (o, e) =>
+                {
+                    LoginScreens = JsonConvert.DeserializeObject<IEnumerable<LoginScreen>>(e.Result).OrderBy(l => l.ToString());
+                    OnPropertyChanged("LoginScreens");
+                    OnPropertyChanged("AvailableScreens");
+                };
+                wc.DownloadStringAsync(new Uri(Properties.Resources.RootAddress + Properties.Resources.ManifestName));
+
             }
             catch (Exception)
             {
