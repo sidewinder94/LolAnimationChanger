@@ -44,6 +44,7 @@ As this project is fairly recent, i only have the following themes (the one that
 - Mecha Cho'Gath (reconstructed from the original SWF & tracks)
 - Jayce (reconstructed from the original SWF & tracks)
 - Sona DJ
+- Ekko
 
 To submit new themes please open an issue to let me know. I'll give the instructions to package them correctly.
 
