@@ -1,0 +1,61 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:manifestEditor="clr-namespace:ManifestEditor.Data"
+        xmlns:local="clr-namespace:ManifestEditor" x:Class="ManifestEditor.MainWindow"
+        Title="Manifest Editor" 
+        Height="350" Width="525"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}">
+    <Window.Resources>
+        <manifestEditor:LoginScreen x:Key="LoginScreen"/>
+        <Style TargetType="{x:Type Button}" x:Key="ButtonStyle">
+            <Setter Property="Margin" Value="10, 5"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="5,2"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+        </Style>
+        <Style TargetType="{x:Type TextBox}" x:Key="TextBoxStyle">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="Margin" Value="10,0"/>
+        </Style>
+        <Style TargetType="{x:Type Label}" x:Key="LabelStyle">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <ListView SelectedItem="{Binding SelectedLoginScreen}" ItemsSource="{Binding LoginScreens}" Grid.Column="0" Grid.Row="0" SelectionMode="Single"/>
+        <Grid Grid.Column="1" Grid.Row="0" DataContext="{Binding SelectedLoginScreen, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" Content="Name : " Style="{StaticResource LabelStyle}"/>
+            <TextBox Grid.Row="0" Grid.Column="1" Style="{StaticResource TextBoxStyle}" Text="{Binding Name}"/>
+            <Label Grid.Row="1" Grid.Column="0" Content="Name Fr :" Style="{StaticResource LabelStyle}"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource TextBoxStyle}" Text="{Binding NameFr}"/>
+            <Label Grid.Row="2" Grid.Column="0" Content="Filename : " Style="{StaticResource LabelStyle}"/>
+            <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource TextBoxStyle}" IsEnabled="False" Text="{Binding Filename}"/>
+            <Label Grid.Row="3" Grid.Column="0" Content="SHA1 : " Style="{StaticResource LabelStyle}"/>
+            <TextBox Grid.Row="3" Grid.Column="1" Style="{StaticResource TextBoxStyle}" IsEnabled="False" Text="{Binding SHA1}"/>
+        </Grid>
+        <Button Grid.Column="1" Grid.Row="1" Style="{StaticResource ButtonStyle}" Content="Save" Click="SaveButton_Click"/>
+    </Grid>
+
+
+
+</Window>

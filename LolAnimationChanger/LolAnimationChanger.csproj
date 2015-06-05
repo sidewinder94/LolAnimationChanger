@@ -74,7 +74,8 @@
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>LolAnimationChanger_CléTemporaire.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
@@ -108,6 +109,7 @@
     <Compile Include="About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Data\LoginScreen.cs" />
     <Compile Include="Packager.xaml.cs">
       <DependentUpon>Packager.xaml</DependentUpon>
     </Compile>
@@ -119,7 +121,6 @@
     </Compile>
     <Compile Include="Resources\Configuration.cs" />
     <Compile Include="Resources\Lang\LocalizedStrings.cs" />
-    <Compile Include="Data\LoginScreen.cs" />
     <Compile Include="Resources\Lang\Strings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
