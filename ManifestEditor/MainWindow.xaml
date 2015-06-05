@@ -32,8 +32,8 @@
             <RowDefinition/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <ListView SelectedItem="{Binding SelectedLoginScreen}" ItemsSource="{Binding LoginScreens}" Grid.Column="0" Grid.Row="0" SelectionMode="Single"/>
-        <Grid Grid.Column="1" Grid.Row="0" DataContext="{Binding SelectedLoginScreen, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}">
+        <ListView ItemsSource="{Binding LoginScreens}" IsSynchronizedWithCurrentItem="True"  Grid.Column="0" Grid.Row="0" SelectionMode="Single"/>
+        <Grid Grid.Column="1" Grid.Row="0" DataContext="{Binding LoginScreens}">
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>

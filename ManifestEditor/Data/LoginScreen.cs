@@ -1,12 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Globalization;
 using System.Runtime.CompilerServices;
-using System.Windows;
-using System.Windows.Data;
-using System.Windows.Markup;
 using ManifestEditor.Annotations;
-using Utils.Text;
 
 namespace ManifestEditor.Data
 {

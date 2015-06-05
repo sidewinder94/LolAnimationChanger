@@ -18,7 +18,6 @@ using Newtonsoft.Json;
 using Utils.Misc;
 using Utils.Text;
 
-
 namespace LolAnimationChanger
 {
     //Selected Theme : \Riot Games\League of Legends\RADS\projects\lol_air_client\releases\0.0.1.139\deploy\theme.properties

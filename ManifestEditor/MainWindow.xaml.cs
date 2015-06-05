@@ -1,51 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
-using System.Security.Policy;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using ManifestEditor.Annotations;
 using ManifestEditor.Data;
 using Microsoft.Win32;
 using Newtonsoft.Json;
-using Utils.Text;
-using Path = System.IO.Path;
 
 namespace ManifestEditor
 {
     /// <summary>
     /// Logique d'interaction pour MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window, INotifyPropertyChanged
+    public partial class MainWindow : Window
     {
         private String _manifestFile;
-        private LoginScreen _selectedLoginScreen;
-
 
         public IEnumerable<LoginScreen> LoginScreens { get; set; }
-
-        public LoginScreen SelectedLoginScreen
-        {
-            get { return _selectedLoginScreen; }
-            set
-            {
-                _selectedLoginScreen = value;
-                OnPropertyChanged();
-            }
-        }
 
         public MainWindow()
         {
@@ -134,15 +107,6 @@ namespace ManifestEditor
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             SaveManifest();
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            var handler = PropertyChanged;
-            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
