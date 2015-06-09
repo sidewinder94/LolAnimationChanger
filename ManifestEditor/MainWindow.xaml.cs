@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using ManifestEditor.Data;
 using Microsoft.Win32;
@@ -107,6 +108,28 @@ namespace ManifestEditor
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             SaveManifest();
+        }
+
+        private void RefreshAllButton_Click(object sender, RoutedEventArgs e)
+        {
+
+            Task asyncRefresh = new Task((basePath) =>
+            {
+                foreach (var loginScreen in LoginScreens)
+                {
+                    loginScreen.SHA1 = ComputeSHA1(Path.Combine((String)basePath, loginScreen.Filename));
+                }
+                MessageBox.Show("Finished Refreshing", "Finished", MessageBoxButton.OK, MessageBoxImage.Information);
+            }, Path.GetDirectoryName(_manifestFile));
+
+            asyncRefresh.Start();
+        }
+
+        private void RefreshOneButton_Click(object sender, RoutedEventArgs e)
+        {
+            String basePath = Path.GetDirectoryName(_manifestFile);
+            var selected = (LoginScreen)ListView.SelectedItem;
+            selected.SHA1 = ComputeSHA1(Path.Combine(basePath, selected.Filename));
         }
     }
 }

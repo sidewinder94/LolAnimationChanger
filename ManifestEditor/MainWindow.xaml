@@ -32,7 +32,7 @@
             <RowDefinition/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <ListView ItemsSource="{Binding LoginScreens}" IsSynchronizedWithCurrentItem="True"  Grid.Column="0" Grid.Row="0" SelectionMode="Single"/>
+        <ListView x:Name="ListView" ItemsSource="{Binding LoginScreens}" IsSynchronizedWithCurrentItem="True"  Grid.Column="0" Grid.Row="0" SelectionMode="Single"/>
         <Grid Grid.Column="1" Grid.Row="0" DataContext="{Binding LoginScreens}">
             <Grid.RowDefinitions>
                 <RowDefinition/>
@@ -53,6 +53,8 @@
             <Label Grid.Row="3" Grid.Column="0" Content="SHA1 : " Style="{StaticResource LabelStyle}"/>
             <TextBox Grid.Row="3" Grid.Column="1" Style="{StaticResource TextBoxStyle}" IsEnabled="False" Text="{Binding SHA1}"/>
         </Grid>
+        <Button Grid.Column="0" Grid.Row="1" Style="{StaticResource ButtonStyle}" Content="Refresh all SHA1" Click="RefreshAllButton_Click"/>
+        <Button Grid.Column="1" Grid.Row="1" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Left" Content="Refresh Current SHA1" Click="RefreshOneButton_Click"/>
         <Button Grid.Column="1" Grid.Row="1" Style="{StaticResource ButtonStyle}" Content="Save" Click="SaveButton_Click"/>
     </Grid>
 
