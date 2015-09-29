@@ -46,6 +46,10 @@ As this project is fairly recent, i only have the following themes (the one that
 - Sona DJ
 - Ekko
 
+As Riot Games published all login screens on their youtube channel, I reconstructed older login screens using these videos (Spiritguard Udyr is the exception).
+
+There is nearly 60 login screens available now
+
 To submit new themes please open an issue to let me know. I'll give the instructions to package them correctly.
 
 #Open Source Software used
