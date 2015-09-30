@@ -137,7 +137,10 @@ namespace LolAnimationChanger.Data
             catch (Exception e)
             {
                 //If something failed, we retore the backup folder
-                Directory.Move(String.Format("{0}.bak", dirName), dirName);
+                if (Directory.Exists(String.Format("{0}.bak", dirName)))
+                {
+                    Directory.Move(String.Format("{0}.bak", dirName), dirName);
+                }
                 Console.WriteLine(e);
 
                 return false;

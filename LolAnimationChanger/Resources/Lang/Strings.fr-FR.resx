@@ -201,7 +201,7 @@ Merci de vérifier que vous avez les droits d'écrire dans le répertoire suivan
 Merci de vérifier que vous pouvez écrire dans le répertoire de l'application</value>
   </data>
   <data name="SettingsBackupError" xml:space="preserve">
-    <value>Echec de la sauvegarde the vode fichier de configuration de theme original.
+    <value>Echec de la sauvegarde the votre fichier de configuration original.
 Voulez-vous continuer quand même ?</value>
   </data>
   <data name="SelectTheme" xml:space="preserve">
