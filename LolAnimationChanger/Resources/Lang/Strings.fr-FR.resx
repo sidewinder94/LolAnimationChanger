@@ -239,4 +239,7 @@ Merci de vérifier que vous avez les droits d'écrire dans le répertoire suivan
   <data name="Admin" xml:space="preserve">
     <value>Admin</value>
   </data>
+  <data name="ImportUserTheme" xml:space="preserve">
+    <value>Importer un Thème Utilisateur</value>
+  </data>
 </root>

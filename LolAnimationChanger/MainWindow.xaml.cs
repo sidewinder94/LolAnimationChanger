@@ -388,6 +388,8 @@ namespace LolAnimationChanger
         }
         #endregion
 
+        #region ContextMenu Handlers
+
         private void AboutMenuItem_Click(object sender, RoutedEventArgs e)
         {
             var about = new About();
@@ -398,11 +400,12 @@ namespace LolAnimationChanger
         {
             var result = new List<LoginScreen>();
             var dirs = Directory.EnumerateDirectories(String.Format("{0}{1}",
-                        Configuration.GamePath, Configuration.ThemeDirPath));
+                Configuration.GamePath, Configuration.ThemeDirPath));
             result.AddRange(from dir in dirs
                             where
                                 !LoginScreens.Any(
-                                    l => l.Filename.Equals(String.Format("{0}.zip", dir.RegExpReplace(@"^.*\\", "")))) && !dir.Contains("parchment")
+                                    l => l.Filename.Equals(String.Format("{0}.zip", dir.RegExpReplace(@"^.*\\", "")))) &&
+                                !dir.Contains("parchment")
                             select new LoginScreen()
                             {
                                 Name = dir.RegExpReplace(@"^.*\\", ""),
@@ -415,6 +418,27 @@ namespace LolAnimationChanger
             };
             packager.ShowDialog();
         }
+
+        private void ImportUserThemeMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            var storagePath = Path.Combine(Configuration.StoragePath, @"UserThemes");
+            var manifestPath = Path.Combine(storagePath, "manifest.json");
+            if (!Directory.Exists(storagePath))
+            {
+                Directory.CreateDirectory(storagePath);
+                using (var f = File.CreateText(manifestPath))
+                {
+                    f.Write("[]");
+                }
+            }
+
+            var localLoginScreens = JsonConvert.DeserializeObject<IEnumerable<LoginScreen>>(File.ReadAllText(manifestPath));
+            //TODO : Open import window and put the above code in it
+
+        }
+
+        #endregion
+
 
         private void RunAsAdmin_Click(object sender, RoutedEventArgs e)
         {

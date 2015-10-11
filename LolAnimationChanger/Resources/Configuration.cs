@@ -13,6 +13,19 @@ namespace LolAnimationChanger.Resources
     public class Configuration
     {
 
+
+        public static String StoragePath
+        {
+            get
+            {
+                var appPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\LeagueOfLegendsAnimationChanger";
+
+                if (!Directory.Exists(appPath)) Directory.CreateDirectory(appPath);
+
+                return appPath;
+            }
+        }
+
         private static String @Path
         {
             get
@@ -20,11 +33,9 @@ namespace LolAnimationChanger.Resources
 #if DEBUG
                 return "config.json";
 #else
-                var appPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\LeagueOfLegendsAnimationChanger";
 
-                if (!Directory.Exists(appPath)) Directory.CreateDirectory(appPath);
 
-                return appPath + @"\config.json";
+                return StoragePath + @"\config.json";
 #endif
             }
         }
