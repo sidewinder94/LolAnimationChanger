@@ -9,6 +9,7 @@ using System.Runtime.CompilerServices;
 using System.Security;
 using System.Security.Principal;
 using System.Windows;
+using System.Windows.Data;
 using LolAnimationChanger.Annotations;
 using LolAnimationChanger.Data;
 using LolAnimationChanger.Resources;
@@ -39,7 +40,19 @@ namespace LolAnimationChanger
         private long _lastBytes;
         private Boolean _displayUnkown;
         private Boolean _forceExtraction;
+        private string _searchText;
 
+
+        public String SearchText
+        {
+            get { return ""; }
+            set
+            {
+                if (value == _searchText) return;
+                _searchText = value;
+                CollectionViewSource.GetDefaultView(LoginScreensList.ItemsSource).Refresh();
+            }
+        }
 
         public String TitleString
         {
@@ -305,6 +318,7 @@ namespace LolAnimationChanger
                     LoginScreens = JsonConvert.DeserializeObject<IEnumerable<LoginScreen>>(e.Result).OrderBy(l => l.ToString());
                     OnPropertyChanged("LoginScreens");
                     OnPropertyChanged("AvailableScreens");
+                    CollectionViewSource.GetDefaultView(LoginScreensList.ItemsSource).Filter = UserFilter;
                 };
                 wc.DownloadStringAsync(new Uri(Properties.Resources.RootAddress + Properties.Resources.ManifestName));
 
@@ -407,6 +421,14 @@ namespace LolAnimationChanger
 
             Process.Start(startInfo);
             Close();
+        }
+
+
+        private bool UserFilter(object item)
+        {
+            if (_searchText.IsEmpty()) return true;
+            var i = (LoginScreen)item;
+            return i.ToString().ToLower().Contains(_searchText.ToLower());
         }
     }
 }
