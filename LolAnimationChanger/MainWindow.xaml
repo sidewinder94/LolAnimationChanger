@@ -61,7 +61,7 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Label Grid.Column="0" Grid.Row="0" Content="{Binding Source={StaticResource LocalizedStrings}, Path=Locale.ChooseDownload, Mode=OneTime}" HorizontalAlignment="Left"/>
-                <ComboBox x:Name="LoginScreensList" Grid.Column="1"  IsEditable="True" Grid.Row="0" ItemsSource="{Binding LoginScreens}" SelectedItem="{Binding DownloadScreen}" Style="{StaticResource ComboBoxStyle}" IsEnabled="{Binding DownloadEnabled}" Text="{Binding SearchText}" SelectedIndex="-1" IsTextSearchEnabled="False"/>
+                <ComboBox x:Name="LoginScreensList" Grid.Column="1"  IsEditable="True" Grid.Row="0" ItemsSource="{Binding LoginScreens}" SelectedItem="{Binding DownloadScreen}" Style="{StaticResource ComboBoxStyle}" IsEnabled="{Binding DownloadEnabled}" Text="{Binding SearchText}" SelectedIndex="-1" IsTextSearchEnabled="False" DropDownClosed="LoginScreensList_DropDownClosed"/>
                 <Button Grid.Column="2" Grid.Row="0" Content="{Binding Source={StaticResource LocalizedStrings}, Path=Locale.Download, Mode=OneTime}" Style="{StaticResource ButtonStyle}" IsEnabled="{Binding DownloadEnabled}" Click="DownloadButton_Click" Margin="30,0,10,0"/>
                 <ProgressBar Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Value="{Binding DownloadProgress}" Visibility="{Binding DownloadProgressVisibility}" Style="{StaticResource ProgressBarStyle}"/>
                 <Label Grid.Column="2" Grid.Row="1" Content="{Binding DownloadSpeed}" HorizontalAlignment="Right"/>

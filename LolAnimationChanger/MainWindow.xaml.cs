@@ -9,6 +9,7 @@ using System.Runtime.CompilerServices;
 using System.Security;
 using System.Security.Principal;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Data;
 using LolAnimationChanger.Annotations;
 using LolAnimationChanger.Data;
@@ -45,7 +46,7 @@ namespace LolAnimationChanger
 
         public String SearchText
         {
-            get { return ""; }
+            get { return DownloadScreen != null ? DownloadScreen.ToString() : ""; }
             set
             {
                 if (value == _searchText) return;
@@ -429,6 +430,15 @@ namespace LolAnimationChanger
             if (_searchText.IsEmpty()) return true;
             var i = (LoginScreen)item;
             return i.ToString().ToLower().Contains(_searchText.ToLower());
+        }
+
+
+        private void LoginScreensList_DropDownClosed(object sender, EventArgs e)
+        {
+            if (((ComboBox)sender).SelectedIndex != -1)
+            {
+                SearchText = "";
+            }
         }
     }
 }
