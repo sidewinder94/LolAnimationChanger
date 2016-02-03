@@ -97,6 +97,15 @@ namespace LolAnimationChanger.Resources
             }
         }
 
+        public static String CurrentSelectedTheme
+        {
+            get
+            {
+                var themeSettingsFilePath = String.Format("{0}{1}", GamePath,
+                ThemeConfigFile);
+                return File.ReadAllText(themeSettingsFilePath).RegExpReplace(@"(?:.*\W*)(?:themeConfig=)(\w+),.*", "$1");
+            }
+        }
 
 
         private String _launcherVersion;

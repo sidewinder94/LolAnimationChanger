@@ -171,14 +171,16 @@ namespace LolAnimationChanger
             {
                 _forceExtraction = value;
                 OnPropertyChanged("AvailableScreens");
+                SelectCurrentTheme();
             }
         }
 
         public MainWindow()
         {
-            DownloadLoginScreenList();
+
             CheckConfiguration();
             InitializeComponent();
+            DownloadLoginScreenList();
         }
 
         private void DownloadButton_Click(object sender, RoutedEventArgs e)
@@ -319,7 +321,9 @@ namespace LolAnimationChanger
                     LoginScreens = JsonConvert.DeserializeObject<IEnumerable<LoginScreen>>(e.Result).OrderBy(l => l.ToString());
                     OnPropertyChanged("LoginScreens");
                     OnPropertyChanged("AvailableScreens");
+                    SelectCurrentTheme();
                     CollectionViewSource.GetDefaultView(LoginScreensList.ItemsSource).Filter = UserFilter;
+
                 };
                 wc.DownloadStringAsync(new Uri(Properties.Resources.RootAddress + Properties.Resources.ManifestName));
 
@@ -438,6 +442,16 @@ namespace LolAnimationChanger
             if (((ComboBox)sender).SelectedIndex != -1)
             {
                 SearchText = "";
+            }
+        }
+
+        private void SelectCurrentTheme()
+        {
+            var curr = AvailableScreens.FirstOrDefault(ls => ls.Filename.Contains(Configuration.CurrentSelectedTheme));
+            if (curr != null)
+            {
+                SelectedTheme = curr;
+                OnPropertyChanged("SelectedTheme");
             }
         }
     }
