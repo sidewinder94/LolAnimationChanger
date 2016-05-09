@@ -133,8 +133,8 @@
     <value>RADS\projects\lol_air_client\releases\</value>
   </data>
   <data name="RootAddress" xml:space="preserve">
-    <value>https://s3-eu-west-1.amazonaws.com/data-zarrouk-eu/lol-animation-changer/</value>
-    <comment>https://googledrive.com/host/0B2MpshTpJ88FfjEyNXM1VFpOWF9KanNNb21vODNfb1BxeDIzcFNwUGliNThGMTI1YzQwanc/</comment>
+    <value>http://data.zarrouk.eu/lol-animation-changer/</value>
+    <comment>https://googledrive.com/host/0B2MpshTpJ88FfjEyNXM1VFpOWF9KanNNb21vODNfb1BxeDIzcFNwUGliNThGMTI1YzQwanc/ ; https://s3-eu-west-1.amazonaws.com/data-zarrouk-eu/lol-animation-changer/</comment>
   </data>
   <data name="SourceUrl" xml:space="preserve">
     <value>https://github.com/sidewinder94/LolAnimationChanger</value>
