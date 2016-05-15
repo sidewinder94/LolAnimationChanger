@@ -87,8 +87,14 @@
                         <DataTemplate>
                             <DockPanel Width="{Binding RelativeSource={RelativeSource AncestorType=ComboBox}, Path=ActualWidth, Mode=OneWay}">
                                 <TextBlock DockPanel.Dock="Left" Text="{Binding}"/>
-                                <Button DockPanel.Dock="Right" HorizontalAlignment="Right" Content="X" Foreground="DarkRed" Background="White" Padding="10,0" Click="ButtonDelete_OnClick"/>
+                                <Button DockPanel.Dock="Right" HorizontalAlignment="Right" Content="X" Foreground="DarkRed" Background="White" Padding="10,0" Click="ButtonDelete_OnClick" x:Name="DeleteButton"/>
                             </DockPanel>
+                            <DataTemplate.Triggers>
+                                <!--hides the button for the selected item-->
+                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=ComboBoxItem, Mode=FindAncestor}, Path=IsSelected}" Value="{x:Null}">
+                                    <Setter TargetName="DeleteButton" Property="Visibility" Value="Collapsed"/>
+                                </DataTrigger>
+                            </DataTemplate.Triggers>
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
