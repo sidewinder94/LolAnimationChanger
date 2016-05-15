@@ -211,11 +211,13 @@ namespace LolAnimationChanger
 
                 if (DisplayUnknown)
                 {
-                    var dirs = Directory.EnumerateDirectories($"{Configuration.GamePath}{Configuration.ThemeDirPath}");
+                    var dirs = Directory.EnumerateDirectories(String.Format("{0}{1}", Configuration.GamePath,
+                        Configuration.ThemeDirPath));
                     result = result.Concat(from dir in dirs
                                            where
                                                !LoginScreens.Any(
-                                                   l => l.Filename.Equals($"{dir.RegExpReplace(@"^.*\\", "")}.zip")) && !dir.Contains("parchment")
+                                                   l => l.Filename.Equals(String.Format("{0}.zip",
+                                                       dir.RegExpReplace(@"^.*\\", "")))) && !dir.Contains("parchment")
                                            select new LoginScreen()
                                            {
                                                Name = dir.RegExpReplace(@"^.*\\", ""),
@@ -280,8 +282,9 @@ namespace LolAnimationChanger
                 _lastUpdate = now;
             }
 
-            DownloadSpeed = $"{Math.Round(DownloadProgress, 2):0.00}%";
-            if (_bytesPerSecond != 0) DownloadSpeed += $" {Misc.HumanReadableByteCount(_bytesPerSecond)}/s";
+            DownloadSpeed = String.Format("{0:0.00}%", Math.Round(DownloadProgress, 2));
+            if (_bytesPerSecond != 0) DownloadSpeed += String.Format(" {0}/s",
+                Misc.HumanReadableByteCount(_bytesPerSecond));
 
         }
 
@@ -390,7 +393,7 @@ namespace LolAnimationChanger
         }
 
 
-        private void OnPropertyChanged<T>(Expression<Func<MainWindow, T>>  propertyPath)
+        private void OnPropertyChanged<T>(Expression<Func<MainWindow, T>> propertyPath)
         {
             var info = this.GetPropertyInfo(propertyPath);
             OnPropertyChanged(info.Name);
@@ -408,7 +411,8 @@ namespace LolAnimationChanger
         private void PackNewThemesMenuItem_Click(object sender, RoutedEventArgs e)
         {
             var result = new List<LoginScreen>();
-            var dirs = Directory.EnumerateDirectories($"{Configuration.GamePath}{Configuration.ThemeDirPath}");
+            var dirs = Directory.EnumerateDirectories(String.Format("{0}{1}", Configuration.GamePath,
+                Configuration.ThemeDirPath));
             result.AddRange(from dir in dirs
                             where
                                 !LoginScreens.Any(
@@ -469,16 +473,17 @@ namespace LolAnimationChanger
         {
             if (AvailableScreens.Count >= 1)
             {
-                var loginScreen = (sender as Button)?.DataContext as LoginScreen;
-                loginScreen?.Delete();
-                OnPropertyChanged(x => x.AvailableScreens);    
+                var button = sender as Button;
+                var loginScreen = button != null ? button.DataContext as LoginScreen : null;
+                if (loginScreen != null) loginScreen.Delete();
+                OnPropertyChanged(x => x.AvailableScreens);
             }
             else
             {
                 MessageBox.Show(Strings.LastThemeDeletionError, Strings.Warning, MessageBoxButton.OK,
                     MessageBoxImage.Warning);
             }
-            
+
         }
     }
 }

@@ -157,13 +157,13 @@ namespace LolAnimationChanger.Data
 
         public Boolean Apply()
         {
-            var themeSettingsFilePath = $"{Configuration.GamePath}{Configuration.ThemeConfigFile}";
+            var themeSettingsFilePath = String.Format("{0}{1}", Configuration.GamePath, Configuration.ThemeConfigFile);
 
-            if (!File.Exists($"{themeSettingsFilePath}.bak"))
+            if (!File.Exists(String.Format("{0}.bak", themeSettingsFilePath)))
             {
                 try
                 {
-                    File.Copy(themeSettingsFilePath, $"{themeSettingsFilePath}.bak");
+                    File.Copy(themeSettingsFilePath, String.Format("{0}.bak", themeSettingsFilePath));
                 }
                 catch (Exception e)
                 {
@@ -184,7 +184,7 @@ namespace LolAnimationChanger.Data
                 var themeDirName = (Filename == null && SHA1 == null) ? Name : Filename.Replace(".zip", "");
 
                 String config = File.ReadAllText(themeSettingsFilePath)
-                    .RegExpReplace(@"(themeConfig=)(?:.*)", $@"$1{themeDirName}{RequiredResources}");
+                    .RegExpReplace(@"(themeConfig=)(?:.*)", String.Format(themeDirName, themeDirName, RequiredResources));
 
                 File.WriteAllText(themeSettingsFilePath, config);
 
@@ -225,7 +225,8 @@ namespace LolAnimationChanger.Data
 
         public void Delete()
         {
-            var dirName = $"{Configuration.GamePath}{Configuration.ThemeDirPath}{Filename.Replace(".zip", "")}";
+            var dirName = String.Format("{0}{1}{2}", Configuration.GamePath, Configuration.ThemeDirPath,
+                Filename.Replace(".zip", ""));
             try
             {
                 if (File.Exists(Path.Combine(BasePath, Filename)))
