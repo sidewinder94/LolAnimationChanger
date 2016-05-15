@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Net;
 using System.Runtime.CompilerServices;
 using System.Security;
@@ -21,6 +22,7 @@ using Microsoft.Win32;
 using Newtonsoft.Json;
 using Utils.Misc;
 using Utils.Text;
+using Utils.Reflection;
 
 namespace LolAnimationChanger
 {
@@ -158,7 +160,7 @@ namespace LolAnimationChanger
             set
             {
                 _displayUnkown = value;
-                OnPropertyChanged("AvailableScreens");
+                OnPropertyChanged(x => x.AvailableScreens);
             }
         }
 
@@ -171,7 +173,7 @@ namespace LolAnimationChanger
             set
             {
                 _forceExtraction = value;
-                OnPropertyChanged("AvailableScreens");
+                OnPropertyChanged(x => x.AvailableScreens);
                 SelectCurrentTheme();
             }
         }
@@ -209,12 +211,11 @@ namespace LolAnimationChanger
 
                 if (DisplayUnknown)
                 {
-                    var dirs = Directory.EnumerateDirectories(String.Format("{0}{1}",
-                        Configuration.GamePath, Configuration.ThemeDirPath));
+                    var dirs = Directory.EnumerateDirectories($"{Configuration.GamePath}{Configuration.ThemeDirPath}");
                     result = result.Concat(from dir in dirs
                                            where
                                                !LoginScreens.Any(
-                                                   l => l.Filename.Equals(String.Format("{0}.zip", dir.RegExpReplace(@"^.*\\", "")))) && !dir.Contains("parchment")
+                                                   l => l.Filename.Equals($"{dir.RegExpReplace(@"^.*\\", "")}.zip")) && !dir.Contains("parchment")
                                            select new LoginScreen()
                                            {
                                                Name = dir.RegExpReplace(@"^.*\\", ""),
@@ -279,8 +280,8 @@ namespace LolAnimationChanger
                 _lastUpdate = now;
             }
 
-            DownloadSpeed = String.Format("{0:0.00}%", Math.Round(DownloadProgress, 2));
-            if (_bytesPerSecond != 0) DownloadSpeed += String.Format(" {0}/s", Misc.HumanReadableByteCount(_bytesPerSecond));
+            DownloadSpeed = $"{Math.Round(DownloadProgress, 2):0.00}%";
+            if (_bytesPerSecond != 0) DownloadSpeed += $" {Misc.HumanReadableByteCount(_bytesPerSecond)}/s";
 
         }
 
@@ -320,8 +321,8 @@ namespace LolAnimationChanger
                 wc.DownloadStringCompleted += (o, e) =>
                 {
                     LoginScreens = JsonConvert.DeserializeObject<IEnumerable<LoginScreen>>(e.Result).OrderBy(l => l.ToString());
-                    OnPropertyChanged("LoginScreens");
-                    OnPropertyChanged("AvailableScreens");
+                    OnPropertyChanged(x => x.LoginScreens);
+                    OnPropertyChanged(x => x.AvailableScreens);
                     SelectCurrentTheme();
                     CollectionViewSource.GetDefaultView(LoginScreensList.ItemsSource).Filter = UserFilter;
 
@@ -387,6 +388,15 @@ namespace LolAnimationChanger
             var handler = PropertyChanged;
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
+
+
+        private void OnPropertyChanged<T>(Expression<Func<MainWindow, T>>  propertyPath)
+        {
+            var info = this.GetPropertyInfo(propertyPath);
+            OnPropertyChanged(info.Name);
+        }
+
+
         #endregion
 
         private void AboutMenuItem_Click(object sender, RoutedEventArgs e)
@@ -451,7 +461,7 @@ namespace LolAnimationChanger
             if (curr != null)
             {
                 SelectedTheme = curr;
-                OnPropertyChanged("SelectedTheme");
+                OnPropertyChanged(x => x.SelectedTheme);
             }
         }
 
@@ -461,7 +471,7 @@ namespace LolAnimationChanger
             {
                 var loginScreen = (sender as Button)?.DataContext as LoginScreen;
                 loginScreen?.Delete();
-                OnPropertyChanged("AvailableScreens");    
+                OnPropertyChanged(x => x.AvailableScreens);    
             }
             else
             {
