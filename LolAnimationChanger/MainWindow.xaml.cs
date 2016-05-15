@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
@@ -11,6 +12,7 @@ using System.Security.Principal;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Input;
 using LolAnimationChanger.Annotations;
 using LolAnimationChanger.Data;
 using LolAnimationChanger.Resources;
@@ -42,7 +44,6 @@ namespace LolAnimationChanger
         private Boolean _displayUnkown;
         private Boolean _forceExtraction;
         private string _searchText;
-
 
         public String SearchText
         {
@@ -107,7 +108,7 @@ namespace LolAnimationChanger
 
         public LoginScreen SelectedTheme { get; set; }
 
-        public IEnumerable<LoginScreen> AvailableScreens
+        public ObservableCollection<LoginScreen> AvailableScreens
         {
             get
             {
@@ -193,9 +194,9 @@ namespace LolAnimationChanger
             }
         }
 
-        private IEnumerable<LoginScreen> GetAvailableLoginScreens()
+        private ObservableCollection<LoginScreen> GetAvailableLoginScreens()
         {
-            if (LoginScreens == null) return Enumerable.Empty<LoginScreen>();
+            if (LoginScreens == null) return new ObservableCollection<LoginScreen>(Enumerable.Empty<LoginScreen>());
 
             IEnumerable<LoginScreen> result;
             if (ForceExtraction)
@@ -220,7 +221,7 @@ namespace LolAnimationChanger
                                            });
                 }
             }
-            return result.OrderBy(l => l.ToString());
+            return new ObservableCollection<LoginScreen>(result.OrderBy(l => l.ToString()));
         }
 
         private void ApplyButton_Click(object sender, RoutedEventArgs e)
@@ -397,8 +398,7 @@ namespace LolAnimationChanger
         private void PackNewThemesMenuItem_Click(object sender, RoutedEventArgs e)
         {
             var result = new List<LoginScreen>();
-            var dirs = Directory.EnumerateDirectories(String.Format("{0}{1}",
-                        Configuration.GamePath, Configuration.ThemeDirPath));
+            var dirs = Directory.EnumerateDirectories($"{Configuration.GamePath}{Configuration.ThemeDirPath}");
             result.AddRange(from dir in dirs
                             where
                                 !LoginScreens.Any(
@@ -453,6 +453,22 @@ namespace LolAnimationChanger
                 SelectedTheme = curr;
                 OnPropertyChanged("SelectedTheme");
             }
+        }
+
+        private void ButtonDelete_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (AvailableScreens.Count >= 1)
+            {
+                var loginScreen = (sender as Button)?.DataContext as LoginScreen;
+                loginScreen?.Delete();
+                OnPropertyChanged("AvailableScreens");    
+            }
+            else
+            {
+                MessageBox.Show(Strings.LastThemeDeletionError, Strings.Warning, MessageBoxButton.OK,
+                    MessageBoxImage.Warning);
+            }
+            
         }
     }
 }

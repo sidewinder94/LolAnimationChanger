@@ -157,14 +157,13 @@ namespace LolAnimationChanger.Data
 
         public Boolean Apply()
         {
-            var themeSettingsFilePath = String.Format("{0}{1}", Configuration.GamePath,
-                Configuration.ThemeConfigFile);
+            var themeSettingsFilePath = $"{Configuration.GamePath}{Configuration.ThemeConfigFile}";
 
-            if (!File.Exists(String.Format("{0}.bak", themeSettingsFilePath)))
+            if (!File.Exists($"{themeSettingsFilePath}.bak"))
             {
                 try
                 {
-                    File.Copy(themeSettingsFilePath, String.Format("{0}.bak", themeSettingsFilePath));
+                    File.Copy(themeSettingsFilePath, $"{themeSettingsFilePath}.bak");
                 }
                 catch (Exception e)
                 {
@@ -185,7 +184,7 @@ namespace LolAnimationChanger.Data
                 var themeDirName = (Filename == null && SHA1 == null) ? Name : Filename.Replace(".zip", "");
 
                 String config = File.ReadAllText(themeSettingsFilePath)
-                    .RegExpReplace(@"(themeConfig=)(?:.*)", String.Format(@"$1{0}{1}", themeDirName, RequiredResources));
+                    .RegExpReplace(@"(themeConfig=)(?:.*)", $@"$1{themeDirName}{RequiredResources}");
 
                 File.WriteAllText(themeSettingsFilePath, config);
 
@@ -223,5 +222,25 @@ namespace LolAnimationChanger.Data
         }
 
         #endregion
+
+        public void Delete()
+        {
+            var dirName = $"{Configuration.GamePath}{Configuration.ThemeDirPath}{Filename.Replace(".zip", "")}";
+            try
+            {
+                if (File.Exists(Path.Combine(BasePath, Filename)))
+                {
+                    File.Delete(Path.Combine(BasePath, Filename));
+                }
+                if (Directory.Exists(dirName))
+                {
+                    Directory.Delete(dirName, true);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, Strings.Error, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
     }
 }

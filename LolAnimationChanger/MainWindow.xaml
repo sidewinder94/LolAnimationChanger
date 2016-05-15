@@ -82,7 +82,16 @@
                 <CheckBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="{Binding Source={StaticResource LocalizedStrings}, Path=Locale.DisplayUnknown, Mode=OneTime}" Style="{StaticResource CheckBoxStyle}" IsChecked="{Binding DisplayUnknown}"/>
                 <CheckBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Content="{Binding Source={StaticResource LocalizedStrings}, Path=Locale.ForceExtraction, Mode=OneTime}" Style="{StaticResource CheckBoxStyle}" IsChecked="{Binding ForceExtraction}"/>
                 <Label Grid.Row="2" Grid.Column="0" Content="{Binding Source={StaticResource LocalizedStrings}, Path=Locale.SelectTheme, Mode=OneTime}"/>
-                <ComboBox Grid.Row="2" Grid.Column="1" Style="{StaticResource ComboStyle}" ItemsSource="{Binding AvailableScreens, Mode=OneWay}" SelectedItem="{Binding SelectedTheme}"/>
+                <ComboBox Grid.Row="2" Grid.Column="1" Style="{StaticResource ComboStyle}" ItemsSource="{Binding AvailableScreens, Mode=OneWay}" SelectedItem="{Binding SelectedTheme}" MaxWidth="220">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <DockPanel Width="{Binding RelativeSource={RelativeSource AncestorType=ComboBox}, Path=ActualWidth, Mode=OneWay}">
+                                <TextBlock DockPanel.Dock="Left" Text="{Binding}"/>
+                                <Button DockPanel.Dock="Right" HorizontalAlignment="Right" Content="X" Foreground="DarkRed" Background="White" Padding="10,0" Click="ButtonDelete_OnClick"/>
+                            </DockPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
                 <Button Grid.Row="3" Grid.Column="0" Style="{StaticResource ButtonStyle}" Content="{Binding Source={StaticResource LocalizedStrings}, Path=Locale.RunAs, Mode=OneTime}" Click="RunAsAdmin_Click" HorizontalAlignment="Left" Margin="0,0,10,0" Visibility="{Binding IsNotAdmin, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneTime}"/>
                 <Button Grid.Row="3" Grid.Column="1" Style="{StaticResource ButtonStyle}" Content="{Binding Source={StaticResource LocalizedStrings}, Path=Locale.ApplyTheme, Mode=OneTime}" Click="ApplyButton_Click"/>
             </Grid>
@@ -90,3 +99,4 @@
         
     </Grid>
 </Window>
+
