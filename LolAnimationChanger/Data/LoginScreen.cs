@@ -184,7 +184,7 @@ namespace LolAnimationChanger.Data
                 var themeDirName = (Filename == null && SHA1 == null) ? Name : Filename.Replace(".zip", "");
 
                 String config = File.ReadAllText(themeSettingsFilePath)
-                    .RegExpReplace(@"(themeConfig=)(?:.*)", String.Format(themeDirName, themeDirName, RequiredResources));
+                    .RegExpReplace(@"(themeConfig=)(?:.*)", String.Format("$1{0}{1}", themeDirName, RequiredResources));
 
                 File.WriteAllText(themeSettingsFilePath, config);
 
