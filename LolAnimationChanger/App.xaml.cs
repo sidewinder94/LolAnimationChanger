@@ -24,6 +24,13 @@ namespace LolAnimationChanger
 
         private void App_OnStartup(object sender, StartupEventArgs e)
         {
+            if (Settings.Default.UpgradeRequired)
+            {
+                Settings.Default.Upgrade();
+                Settings.Default.UpgradeRequired = false;
+                Settings.Default.Save();
+            }
+
             Configuration.Load();
         }
 

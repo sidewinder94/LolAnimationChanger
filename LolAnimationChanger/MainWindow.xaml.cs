@@ -330,14 +330,17 @@ namespace LolAnimationChanger
                     OnPropertyChanged(x => x.AvailableScreens);
                     SelectCurrentTheme();
                     CollectionViewSource.GetDefaultView(LoginScreensList.ItemsSource).Filter = UserFilter;
-                    Configuration.Tracker.TrackAsync(
-                        new EventTracking()
-                        {
-                            ClientId = Settings.Default.UserID.ToString(),
-                            Action = "Downloaded Manifest",
-                            DocumentTitle = Properties.Resources.ManifestName,
-                            DocumentPath = Properties.Resources.ManifestName
-                        });
+                    if (Settings.Default.EnableTracking)
+                    {
+                        Configuration.Tracker.TrackAsync(
+                            new EventTracking()
+                            {
+                                ClientId = Settings.Default.UserID.ToString(),
+                                Action = "Downloaded Manifest",
+                                DocumentTitle = Properties.Resources.ManifestName,
+                                DocumentPath = Properties.Resources.ManifestName
+                            });
+                    }
                 };
                 wc.DownloadStringAsync(new Uri(Properties.Resources.RootAddress + Properties.Resources.ManifestName));
 
