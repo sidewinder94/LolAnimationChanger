@@ -28,17 +28,6 @@ namespace LolAnimationChanger.Data
     [UsedImplicitly]
     public class LoginScreen
     {
-        private static SimpleTracker _tracker = new SimpleTracker(Properties.Resources.GATrackingId, Properties.Resources.GATrackingDomain, new SimpleTrackerEnvironment()
-        {
-            OsPlatform = typeof(LoginScreen).Assembly.FullName,
-            Hostname = Settings.Default.UserID.ToString()
-        })
-        {
-            UserAgent = Properties.Resources.UserAgent,
-            Language = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName,
-            UseSsl = true
-        };
-
         private const String BasePath = @"downloads\";
         public String Name { get; set; }
         public String NameFr { get; set; }
@@ -99,13 +88,13 @@ namespace LolAnimationChanger.Data
 
                 if (Settings.Default.EnableTracking)
                 {
-                    _tracker.TrackAsync(
+                    Configuration.Tracker.TrackAsync(
                         new EventTracking()
                         {
                             ClientId = Settings.Default.UserID.ToString(),
                             Action = "Download Started",
                             DocumentTitle = this.Name,
-                            DocumentPath = Properties.Resources.RootAddress + Filename
+                            DocumentPath = Filename
                         });
                 }
 
@@ -118,13 +107,13 @@ namespace LolAnimationChanger.Data
             if (Settings.Default.EnableTracking)
             {
                 await
-                    _tracker.TrackAsync(
+                    Configuration.Tracker.TrackAsync(
                         new EventTracking()
                         {
                             ClientId = Settings.Default.UserID.ToString(),
                             Action = "Download Finished",
                             DocumentTitle = this.Name,
-                            DocumentPath = Properties.Resources.RootAddress + Filename
+                            DocumentPath = Filename
                         });
             }
         }

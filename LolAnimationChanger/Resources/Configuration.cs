@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Windows;
+using GoogleAnalyticsTracker.Simple;
+using LolAnimationChanger.Data;
+using LolAnimationChanger.Properties;
 using LolAnimationChanger.Resources.Lang;
 using Microsoft.Win32;
 using Newtonsoft.Json;
@@ -12,6 +16,17 @@ namespace LolAnimationChanger.Resources
 {
     public class Configuration
     {
+        public static SimpleTracker Tracker = new SimpleTracker(Properties.Resources.GATrackingId, Properties.Resources.GATrackingDomain, new SimpleTrackerEnvironment()
+        {
+            OsPlatform = typeof(LoginScreen).Assembly.FullName,
+            Hostname = Settings.Default.UserID.ToString()
+        })
+        {
+            UserAgent = Properties.Resources.UserAgent,
+            Language = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName,
+            UseSsl = true
+        };
+
 
         private static String @Path
         {
@@ -35,7 +50,7 @@ namespace LolAnimationChanger.Resources
 
             try
             {
-                File.WriteAllText(path, JsonConvert.SerializeObject(GetInstance()._dataHolder));
+                File.WriteAllText(path, JsonConvert.SerializeObject(Instance._dataHolder));
             }
             catch (Exception e)
             {
@@ -54,12 +69,12 @@ namespace LolAnimationChanger.Resources
 
             try
             {
-                GetInstance()._dataHolder = JsonConvert.DeserializeObject<DataHolder>(File.ReadAllText(path));
+                Instance._dataHolder = JsonConvert.DeserializeObject<DataHolder>(File.ReadAllText(path));
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
-                GetInstance()._dataHolder = new DataHolder();
+                Instance._dataHolder = new DataHolder();
                 String found =
                     (String)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Riot Games\League of Legends", "Path",
                         null);
@@ -74,14 +89,14 @@ namespace LolAnimationChanger.Resources
 
         public static String GamePath
         {
-            get { return GetInstance()._dataHolder.GamePath; }
-            set { GetInstance()._dataHolder.GamePath = value; }
+            get { return Instance._dataHolder.GamePath; }
+            set { Instance._dataHolder.GamePath = value; }
         }
 
         public static Boolean PathSet
         {
-            get { return GetInstance()._dataHolder.PathSet; }
-            set { GetInstance()._dataHolder.PathSet = value; }
+            get { return Instance._dataHolder.PathSet; }
+            set { Instance._dataHolder.PathSet = value; }
         }
 
         public static String ThemeConfigFile
@@ -111,24 +126,24 @@ namespace LolAnimationChanger.Resources
         private String _launcherVersion;
         private static String GetLauncherVersion()
         {
-            if (!GetInstance()._launcherVersion.IsEmpty()) return GetInstance()._launcherVersion;
+            if (!Instance._launcherVersion.IsEmpty()) return Instance._launcherVersion;
 
             var dirs = Directory.EnumerateDirectories(String.Format("{0}{1}", GamePath, Properties.Resources.ReleasesPath));
-            GetInstance()._launcherVersion = dirs.Select(d =>
+            Instance._launcherVersion = dirs.Select(d =>
             {
                 Version v;
                 Version.TryParse(d.RegExpReplace(@".*\\", ""), out v);
                 return v;
             }).OrderByDescending(v => v).First().ToString();
-            return GetInstance()._launcherVersion;
+            return Instance._launcherVersion;
         }
 
         #region Singleton Implementation
         private DataHolder _dataHolder;
 
-        private static Configuration GetInstance()
+        private static Configuration Instance
         {
-            return Holder.Config;
+            get { return Holder.Config; }
         }
 
 

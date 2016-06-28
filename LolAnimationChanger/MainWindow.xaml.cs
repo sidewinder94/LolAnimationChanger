@@ -14,8 +14,10 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
+using GoogleAnalyticsTracker.Core.TrackerParameters;
 using LolAnimationChanger.Annotations;
 using LolAnimationChanger.Data;
+using LolAnimationChanger.Properties;
 using LolAnimationChanger.Resources;
 using LolAnimationChanger.Resources.Lang;
 using Microsoft.Win32;
@@ -328,7 +330,14 @@ namespace LolAnimationChanger
                     OnPropertyChanged(x => x.AvailableScreens);
                     SelectCurrentTheme();
                     CollectionViewSource.GetDefaultView(LoginScreensList.ItemsSource).Filter = UserFilter;
-
+                    Configuration.Tracker.TrackAsync(
+                        new EventTracking()
+                        {
+                            ClientId = Settings.Default.UserID.ToString(),
+                            Action = "Downloaded Manifest",
+                            DocumentTitle = Properties.Resources.ManifestName,
+                            DocumentPath = Properties.Resources.ManifestName
+                        });
                 };
                 wc.DownloadStringAsync(new Uri(Properties.Resources.RootAddress + Properties.Resources.ManifestName));
 
