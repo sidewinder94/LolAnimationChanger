@@ -1,4 +1,7 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
+
+using LolAnimationChanger.Properties;
 using LolAnimationChanger.Resources;
 
 namespace LolAnimationChanger
@@ -8,6 +11,17 @@ namespace LolAnimationChanger
     /// </summary>
     public partial class App
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+
+            if (Settings.Default.UserID == Guid.Empty)
+            {
+                Settings.Default.UserID = Guid.NewGuid();
+                Settings.Default.Save();
+            }
+        }
+
         private void App_OnStartup(object sender, StartupEventArgs e)
         {
             Configuration.Load();

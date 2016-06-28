@@ -4,13 +4,23 @@ using System.Globalization;
 using System.IO;
 using System.IO.Compression;
 using System.Net;
+using System.Net.Configuration;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
+
+using GoogleAnalyticsTracker.Core.TrackerParameters;
+
 using LolAnimationChanger.Annotations;
 using LolAnimationChanger.Resources;
 using LolAnimationChanger.Resources.Lang;
 using Utils.Text;
+using GoogleAnalyticsTracker.Simple;
+
+using LolAnimationChanger.Properties;
 
 namespace LolAnimationChanger.Data
 {
@@ -18,6 +28,12 @@ namespace LolAnimationChanger.Data
     [UsedImplicitly]
     public class LoginScreen
     {
+        private static SimpleTracker _tracker = new SimpleTracker(Properties.Resources.GATrackingId, Properties.Resources.GATrackingDomain, new SimpleTrackerEnvironment()
+        {
+            OsPlatform = typeof(LoginScreen).Assembly.FullName,
+            Hostname = Settings.Default.UserID.ToString()
+        });
+
         private const String BasePath = @"downloads\";
         public String Name { get; set; }
         public String NameFr { get; set; }
@@ -74,7 +90,37 @@ namespace LolAnimationChanger.Data
             {
                 if (progressHandler != null) wc.DownloadProgressChanged += progressHandler;
                 if (completedHandler != null) wc.DownloadFileCompleted += completedHandler;
+                wc.DownloadFileCompleted += TrackFileDownloadCompletion;
+
+                if (Settings.Default.EnableTracking)
+                {
+                    _tracker.TrackAsync(
+                        new EventTracking()
+                        {
+                            ClientId = Settings.Default.UserID.ToString(),
+                            Action = "Download Started",
+                            DocumentTitle = this.Name,
+                            DocumentPath = Properties.Resources.RootAddress + Filename
+                        });
+                }
+
                 wc.DownloadFileAsync(new Uri(Properties.Resources.RootAddress + Filename), BasePath + Filename);
+            }
+        }
+
+        private async void TrackFileDownloadCompletion(object sender, AsyncCompletedEventArgs asyncCompletedEventArgs)
+        {
+            if (Settings.Default.EnableTracking)
+            {
+                await
+                    _tracker.TrackAsync(
+                        new EventTracking()
+                        {
+                            ClientId = Settings.Default.UserID.ToString(),
+                            Action = "Download Finished",
+                            DocumentTitle = this.Name,
+                            DocumentPath = Properties.Resources.RootAddress + Filename
+                        });
             }
         }
 
@@ -107,7 +153,6 @@ namespace LolAnimationChanger.Data
                     stream.Close();
                 }
             }
-
         }
 
         public Boolean Extract()

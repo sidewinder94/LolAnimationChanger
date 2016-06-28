@@ -123,6 +123,12 @@
   <data name="EditorUrl" xml:space="preserve">
     <value>https://github.com/sidewinder94</value>
   </data>
+  <data name="GATrackingDomain" xml:space="preserve">
+    <value>lol-animation-changer.zarrouk.eu</value>
+  </data>
+  <data name="GATrackingId" xml:space="preserve">
+    <value>UA-55920654-2</value>
+  </data>
   <data name="LicenseUrl" xml:space="preserve">
     <value>https://raw.githubusercontent.com/sidewinder94/LolAnimationChanger/master/LICENSE</value>
   </data>
