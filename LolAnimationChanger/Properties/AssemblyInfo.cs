@@ -31,11 +31,11 @@ using System.Windows;
 
 [assembly: ThemeInfo(
     ResourceDictionaryLocation.None, //où se trouvent les dictionnaires de ressources spécifiques à un thème
-    //(utilisé si une ressource est introuvable dans la page, 
-    // ou dictionnaires de ressources de l'application)
+                                     //(utilisé si une ressource est introuvable dans la page, 
+                                     // ou dictionnaires de ressources de l'application)
     ResourceDictionaryLocation.SourceAssembly //où se trouve le dictionnaire de ressources générique
-    //(utilisé si une ressource est introuvable dans la page, 
-    // dans l'application ou dans l'un des dictionnaires de ressources spécifiques à un thème)
+                                              //(utilisé si une ressource est introuvable dans la page, 
+                                              // dans l'application ou dans l'un des dictionnaires de ressources spécifiques à un thème)
 )]
 
 
@@ -49,5 +49,4 @@ using System.Windows;
 // Vous pouvez spécifier toutes les valeurs ou indiquer les numéros de build et de révision par défaut 
 // en utilisant '*', comme indiqué ci-dessous :
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("1.0.*")]

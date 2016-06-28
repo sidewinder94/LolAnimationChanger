@@ -158,5 +158,14 @@ namespace LolAnimationChanger.Properties {
                 return ResourceManager.GetString("ThemeDirPath", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to LolAnimationChanger/1.0 (Side).
+        /// </summary>
+        public static string UserAgent {
+            get {
+                return ResourceManager.GetString("UserAgent", resourceCulture);
+            }
+        }
     }
 }

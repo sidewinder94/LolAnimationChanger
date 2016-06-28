@@ -32,7 +32,12 @@ namespace LolAnimationChanger.Data
         {
             OsPlatform = typeof(LoginScreen).Assembly.FullName,
             Hostname = Settings.Default.UserID.ToString()
-        });
+        })
+        {
+            UserAgent = Properties.Resources.UserAgent,
+            Language = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName,
+            UseSsl = true
+        };
 
         private const String BasePath = @"downloads\";
         public String Name { get; set; }
