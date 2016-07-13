@@ -92,7 +92,7 @@ namespace LolAnimationChanger.Data
                         new EventTracking()
                         {
                             ClientId = Configuration.UserID.ToString(),
-                            Action = "Download Started",
+                            Action = String.Format("Download {0} Started", this.Filename),
                             DocumentTitle = this.Name,
                             DocumentPath = Filename
                         });
@@ -111,7 +111,7 @@ namespace LolAnimationChanger.Data
                         new EventTracking()
                         {
                             ClientId = Configuration.UserID.ToString(),
-                            Action = "Download Finished",
+                            Action = String.Format("Download {0} Finished", this.Filename),
                             DocumentTitle = this.Name,
                             DocumentPath = Filename
                         });
