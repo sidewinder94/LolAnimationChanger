@@ -22,41 +22,5 @@ namespace LolAnimationChanger.Properties {
                 return defaultInstance;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("00000000-0000-0000-0000-000000000000")]
-        public global::System.Guid UserID {
-            get {
-                return ((global::System.Guid)(this["UserID"]));
-            }
-            set {
-                this["UserID"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool EnableTracking {
-            get {
-                return ((bool)(this["EnableTracking"]));
-            }
-            set {
-                this["EnableTracking"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool UpgradeRequired {
-            get {
-                return ((bool)(this["UpgradeRequired"]));
-            }
-            set {
-                this["UpgradeRequired"] = value;
-            }
-        }
     }
 }

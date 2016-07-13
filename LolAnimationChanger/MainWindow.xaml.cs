@@ -330,12 +330,12 @@ namespace LolAnimationChanger
                     OnPropertyChanged(x => x.AvailableScreens);
                     SelectCurrentTheme();
                     CollectionViewSource.GetDefaultView(LoginScreensList.ItemsSource).Filter = UserFilter;
-                    if (Settings.Default.EnableTracking)
+                    if (Configuration.EnableTracking)
                     {
                         Configuration.Tracker.TrackAsync(
                             new EventTracking()
                             {
-                                ClientId = Settings.Default.UserID.ToString(),
+                                ClientId = Configuration.UserID.ToString(),
                                 Action = "Downloaded Manifest",
                                 DocumentTitle = Properties.Resources.ManifestName,
                                 DocumentPath = Properties.Resources.ManifestName

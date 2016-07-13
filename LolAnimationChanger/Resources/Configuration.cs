@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
@@ -16,10 +17,10 @@ namespace LolAnimationChanger.Resources
 {
     public class Configuration
     {
-        public static SimpleTracker Tracker = new SimpleTracker(Properties.Resources.GATrackingId, Properties.Resources.GATrackingDomain, new SimpleTrackerEnvironment()
+        public static readonly SimpleTracker Tracker = new SimpleTracker(Properties.Resources.GATrackingId, Properties.Resources.GATrackingDomain, new SimpleTrackerEnvironment()
         {
             OsPlatform = typeof(LoginScreen).Assembly.FullName,
-            Hostname = Settings.Default.UserID.ToString()
+            Hostname = UserID.ToString()
         })
         {
             UserAgent = Properties.Resources.UserAgent,
@@ -64,7 +65,6 @@ namespace LolAnimationChanger.Resources
 
         public static void Load(String path = null)
         {
-
             if (path == null) path = @Path;
 
             try
@@ -84,7 +84,27 @@ namespace LolAnimationChanger.Resources
                 if (found != null) PathSet = true;
 
                 if (Directory.Exists(GamePath + @"RADS")) PathSet = true;
+
+                Instance._dataHolder.EnableTracking = true;
             }
+
+            if (Instance._dataHolder.UserId == Guid.Empty)
+            {
+                Instance._dataHolder.UserId = Guid.NewGuid();
+            }
+
+        }
+
+        public static Boolean EnableTracking
+        {
+            get { return Instance._dataHolder.EnableTracking; }
+            set { Instance._dataHolder.EnableTracking = value; }
+        }
+
+        public static Guid UserID
+        {
+            get { return Instance._dataHolder.UserId; }
+            set { Instance._dataHolder.UserId = value; }
         }
 
         public static String GamePath
@@ -167,6 +187,11 @@ namespace LolAnimationChanger.Resources
 
             public String GamePath = "";
             public Boolean PathSet;
+            [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+            public Guid UserId;
+            [DefaultValue(true)]
+            [JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
+            public bool EnableTracking;
         }
     }
 }

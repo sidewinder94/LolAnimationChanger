@@ -15,27 +15,13 @@ namespace LolAnimationChanger
         {
             base.OnStartup(e);
 
-            if (Settings.Default.UserID == Guid.Empty)
-            {
-                Settings.Default.UserID = Guid.NewGuid();
-                Settings.Default.Save();
-            }
-        }
-
-        private void App_OnStartup(object sender, StartupEventArgs e)
-        {
-            if (Settings.Default.UpgradeRequired)
-            {
-                Settings.Default.Upgrade();
-                Settings.Default.UpgradeRequired = false;
-                Settings.Default.Save();
-            }
-
             Configuration.Load();
         }
 
-        private void App_OnExit(object sender, ExitEventArgs e)
+        protected override void OnExit(ExitEventArgs e)
         {
+            base.OnExit(e);
+
             Configuration.Save();
         }
     }

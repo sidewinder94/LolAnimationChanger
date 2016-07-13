@@ -86,12 +86,12 @@ namespace LolAnimationChanger.Data
                 if (completedHandler != null) wc.DownloadFileCompleted += completedHandler;
                 wc.DownloadFileCompleted += TrackFileDownloadCompletion;
 
-                if (Settings.Default.EnableTracking)
+                if (Configuration.EnableTracking)
                 {
                     Configuration.Tracker.TrackAsync(
                         new EventTracking()
                         {
-                            ClientId = Settings.Default.UserID.ToString(),
+                            ClientId = Configuration.UserID.ToString(),
                             Action = "Download Started",
                             DocumentTitle = this.Name,
                             DocumentPath = Filename
@@ -104,13 +104,13 @@ namespace LolAnimationChanger.Data
 
         private async void TrackFileDownloadCompletion(object sender, AsyncCompletedEventArgs asyncCompletedEventArgs)
         {
-            if (Settings.Default.EnableTracking)
+            if (Configuration.EnableTracking)
             {
                 await
                     Configuration.Tracker.TrackAsync(
                         new EventTracking()
                         {
-                            ClientId = Settings.Default.UserID.ToString(),
+                            ClientId = Configuration.UserID.ToString(),
                             Action = "Download Finished",
                             DocumentTitle = this.Name,
                             DocumentPath = Filename
