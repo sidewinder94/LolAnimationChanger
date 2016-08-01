@@ -296,6 +296,15 @@ namespace LolAnimationChanger.Resources.Lang {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à This is the last remaining theme on your computer, only the archive will be deleted !.
+        /// </summary>
+        public static string LastThemeDeletionError {
+            get {
+                return ResourceManager.GetString("LastThemeDeletionError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Import User Theme.
         /// </summary>
         public static string ImportUserTheme {
@@ -404,6 +413,15 @@ namespace LolAnimationChanger.Resources.Lang {
         public static string Success {
             get {
                 return ResourceManager.GetString("Success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Warning !.
+        /// </summary>
+        public static string Warning {
+            get {
+                return ResourceManager.GetString("Warning", resourceCulture);
             }
         }
     }

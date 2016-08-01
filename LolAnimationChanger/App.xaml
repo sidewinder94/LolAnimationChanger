@@ -3,8 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:lang="clr-namespace:LolAnimationChanger.Resources.Lang"
              StartupUri="MainWindow.xaml"
-             Startup="App_OnStartup"
-             Exit="App_OnExit"
              ShutdownMode="OnMainWindowClose">
     <Application.Resources>
         <lang:LocalizedStrings x:Key="LocalizedStrings"/>

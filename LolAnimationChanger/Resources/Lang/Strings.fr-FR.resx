@@ -242,4 +242,10 @@ Merci de vérifier que vous avez les droits d'écrire dans le répertoire suivan
   <data name="ImportUserTheme" xml:space="preserve">
     <value>Importer un Thème Utilisateur</value>
   </data>
+  <data name="LastThemeDeletionError" xml:space="preserve">
+    <value>Il s'agit du dernier Thème sur votre ordinateur, seul le fichier d'archive sera supprimé</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Attention !</value>
+  </data>
 </root>

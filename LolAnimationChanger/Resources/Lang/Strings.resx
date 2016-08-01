@@ -242,4 +242,10 @@ Please check that you have the rights to write in the following directory :
   <data name="ImportUserTheme" xml:space="preserve">
     <value>Import User Theme</value>
   </data>
+  <data name="LastThemeDeletionError" xml:space="preserve">
+    <value>This is the last remaining theme on your computer, only the archive will be deleted !</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Warning !</value>
+  </data>
 </root>

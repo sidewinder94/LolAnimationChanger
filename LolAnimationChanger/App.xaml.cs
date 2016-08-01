@@ -1,4 +1,7 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
+
+using LolAnimationChanger.Properties;
 using LolAnimationChanger.Resources;
 
 namespace LolAnimationChanger
@@ -8,13 +11,17 @@ namespace LolAnimationChanger
     /// </summary>
     public partial class App
     {
-        private void App_OnStartup(object sender, StartupEventArgs e)
+        protected override void OnStartup(StartupEventArgs e)
         {
+            base.OnStartup(e);
+
             Configuration.Load();
         }
 
-        private void App_OnExit(object sender, ExitEventArgs e)
+        protected override void OnExit(ExitEventArgs e)
         {
+            base.OnExit(e);
+
             Configuration.Save();
         }
     }

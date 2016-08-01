@@ -123,6 +123,12 @@
   <data name="EditorUrl" xml:space="preserve">
     <value>https://github.com/sidewinder94</value>
   </data>
+  <data name="GATrackingDomain" xml:space="preserve">
+    <value>lol-animation-changer.zarrouk.eu</value>
+  </data>
+  <data name="GATrackingId" xml:space="preserve">
+    <value>UA-55920654-3</value>
+  </data>
   <data name="LicenseUrl" xml:space="preserve">
     <value>https://raw.githubusercontent.com/sidewinder94/LolAnimationChanger/master/LICENSE</value>
   </data>
@@ -133,8 +139,8 @@
     <value>RADS\projects\lol_air_client\releases\</value>
   </data>
   <data name="RootAddress" xml:space="preserve">
-    <value>https://s3-eu-west-1.amazonaws.com/data-zarrouk-eu/lol-animation-changer/</value>
-    <comment>https://googledrive.com/host/0B2MpshTpJ88FfjEyNXM1VFpOWF9KanNNb21vODNfb1BxeDIzcFNwUGliNThGMTI1YzQwanc/</comment>
+    <value>http://data.zarrouk.eu/lol-animation-changer/</value>
+    <comment>https://googledrive.com/host/0B2MpshTpJ88FfjEyNXM1VFpOWF9KanNNb21vODNfb1BxeDIzcFNwUGliNThGMTI1YzQwanc/ ; https://s3-eu-west-1.amazonaws.com/data-zarrouk-eu/lol-animation-changer/</comment>
   </data>
   <data name="SourceUrl" xml:space="preserve">
     <value>https://github.com/sidewinder94/LolAnimationChanger</value>
@@ -144,5 +150,8 @@
   </data>
   <data name="ThemeDirPath" xml:space="preserve">
     <value>RADS\projects\lol_air_client\releases\{0}\deploy\mod\lgn\themes\</value>
+  </data>
+  <data name="UserAgent" xml:space="preserve">
+    <value>LolAnimationChanger/1.0 (Side)</value>
   </data>
 </root>

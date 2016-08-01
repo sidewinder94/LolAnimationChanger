@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Net;
 using System.Runtime.CompilerServices;
 using System.Security;
@@ -11,14 +13,18 @@ using System.Security.Principal;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Input;
+using GoogleAnalyticsTracker.Core.TrackerParameters;
 using LolAnimationChanger.Annotations;
 using LolAnimationChanger.Data;
+using LolAnimationChanger.Properties;
 using LolAnimationChanger.Resources;
 using LolAnimationChanger.Resources.Lang;
 using Microsoft.Win32;
 using Newtonsoft.Json;
 using Utils.Misc;
 using Utils.Text;
+using Utils.Reflection;
 
 namespace LolAnimationChanger
 {
@@ -42,7 +48,6 @@ namespace LolAnimationChanger
         private Boolean _displayUnkown;
         private Boolean _forceExtraction;
         private string _searchText;
-
 
         public String SearchText
         {
@@ -107,7 +112,7 @@ namespace LolAnimationChanger
 
         public LoginScreen SelectedTheme { get; set; }
 
-        public IEnumerable<LoginScreen> AvailableScreens
+        public ObservableCollection<LoginScreen> AvailableScreens
         {
             get
             {
@@ -157,7 +162,7 @@ namespace LolAnimationChanger
             set
             {
                 _displayUnkown = value;
-                OnPropertyChanged("AvailableScreens");
+                OnPropertyChanged(x => x.AvailableScreens);
             }
         }
 
@@ -170,7 +175,7 @@ namespace LolAnimationChanger
             set
             {
                 _forceExtraction = value;
-                OnPropertyChanged("AvailableScreens");
+                OnPropertyChanged(x => x.AvailableScreens);
                 SelectCurrentTheme();
             }
         }
@@ -193,9 +198,9 @@ namespace LolAnimationChanger
             }
         }
 
-        private IEnumerable<LoginScreen> GetAvailableLoginScreens()
+        private ObservableCollection<LoginScreen> GetAvailableLoginScreens()
         {
-            if (LoginScreens == null) return Enumerable.Empty<LoginScreen>();
+            if (LoginScreens == null) return new ObservableCollection<LoginScreen>(Enumerable.Empty<LoginScreen>());
 
             IEnumerable<LoginScreen> result;
             if (ForceExtraction)
@@ -208,19 +213,20 @@ namespace LolAnimationChanger
 
                 if (DisplayUnknown)
                 {
-                    var dirs = Directory.EnumerateDirectories(String.Format("{0}{1}",
-                        Configuration.GamePath, Configuration.ThemeDirPath));
+                    var dirs = Directory.EnumerateDirectories(String.Format("{0}{1}", Configuration.GamePath,
+                        Configuration.ThemeDirPath));
                     result = result.Concat(from dir in dirs
                                            where
                                                !LoginScreens.Any(
-                                                   l => l.Filename.Equals(String.Format("{0}.zip", dir.RegExpReplace(@"^.*\\", "")))) && !dir.Contains("parchment")
+                                                   l => l.Filename.Equals(String.Format("{0}.zip",
+                                                       dir.RegExpReplace(@"^.*\\", "")))) && !dir.Contains("parchment")
                                            select new LoginScreen()
                                            {
                                                Name = dir.RegExpReplace(@"^.*\\", ""),
                                            });
                 }
             }
-            return result.OrderBy(l => l.ToString());
+            return new ObservableCollection<LoginScreen>(result.OrderBy(l => l.ToString()));
         }
 
         private void ApplyButton_Click(object sender, RoutedEventArgs e)
@@ -279,7 +285,8 @@ namespace LolAnimationChanger
             }
 
             DownloadSpeed = String.Format("{0:0.00}%", Math.Round(DownloadProgress, 2));
-            if (_bytesPerSecond != 0) DownloadSpeed += String.Format(" {0}/s", Misc.HumanReadableByteCount(_bytesPerSecond));
+            if (_bytesPerSecond != 0) DownloadSpeed += String.Format(" {0}/s",
+                Misc.HumanReadableByteCount(_bytesPerSecond));
 
         }
 
@@ -319,11 +326,21 @@ namespace LolAnimationChanger
                 wc.DownloadStringCompleted += (o, e) =>
                 {
                     LoginScreens = JsonConvert.DeserializeObject<IEnumerable<LoginScreen>>(e.Result).OrderBy(l => l.ToString());
-                    OnPropertyChanged("LoginScreens");
-                    OnPropertyChanged("AvailableScreens");
+                    OnPropertyChanged(x => x.LoginScreens);
+                    OnPropertyChanged(x => x.AvailableScreens);
                     SelectCurrentTheme();
                     CollectionViewSource.GetDefaultView(LoginScreensList.ItemsSource).Filter = UserFilter;
-
+                    if (Configuration.EnableTracking)
+                    {
+                        Configuration.Tracker.TrackAsync(
+                            new EventTracking()
+                            {
+                                ClientId = Configuration.UserID.ToString(),
+                                Action = "Downloaded Manifest",
+                                DocumentTitle = Properties.Resources.ManifestName,
+                                DocumentPath = Properties.Resources.ManifestName
+                            });
+                    }
                 };
                 wc.DownloadStringAsync(new Uri(Properties.Resources.RootAddress + Properties.Resources.ManifestName));
 
@@ -386,6 +403,15 @@ namespace LolAnimationChanger
             var handler = PropertyChanged;
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
+
+
+        private void OnPropertyChanged<T>(Expression<Func<MainWindow, T>> propertyPath)
+        {
+            var info = this.GetPropertyInfo(propertyPath);
+            OnPropertyChanged(info.Name);
+        }
+
+
         #endregion
 
         #region ContextMenu Handlers
@@ -400,7 +426,8 @@ namespace LolAnimationChanger
         {
             var result = new List<LoginScreen>();
             var dirs = Directory.EnumerateDirectories(String.Format("{0}{1}",
-                Configuration.GamePath, Configuration.ThemeDirPath));
+                Configuration.GamePath, 
+                Configuration.ThemeDirPath));
             result.AddRange(from dir in dirs
                             where
                                 !LoginScreens.Any(
@@ -475,8 +502,25 @@ namespace LolAnimationChanger
             if (curr != null)
             {
                 SelectedTheme = curr;
-                OnPropertyChanged("SelectedTheme");
+                OnPropertyChanged(x => x.SelectedTheme);
             }
+        }
+
+        private void ButtonDelete_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (AvailableScreens.Count >= 1)
+            {
+                var button = sender as Button;
+                var loginScreen = button != null ? button.DataContext as LoginScreen : null;
+                if (loginScreen != null) loginScreen.Delete();
+                OnPropertyChanged(x => x.AvailableScreens);
+            }
+            else
+            {
+                MessageBox.Show(Strings.LastThemeDeletionError, Strings.Warning, MessageBoxButton.OK,
+                    MessageBoxImage.Warning);
+            }
+
         }
     }
 }

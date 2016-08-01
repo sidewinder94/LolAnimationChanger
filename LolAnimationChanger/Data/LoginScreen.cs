@@ -4,13 +4,23 @@ using System.Globalization;
 using System.IO;
 using System.IO.Compression;
 using System.Net;
+using System.Net.Configuration;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
+
+using GoogleAnalyticsTracker.Core.TrackerParameters;
+
 using LolAnimationChanger.Annotations;
 using LolAnimationChanger.Resources;
 using LolAnimationChanger.Resources.Lang;
 using Utils.Text;
+using GoogleAnalyticsTracker.Simple;
+
+using LolAnimationChanger.Properties;
 
 namespace LolAnimationChanger.Data
 {
@@ -74,7 +84,37 @@ namespace LolAnimationChanger.Data
             {
                 if (progressHandler != null) wc.DownloadProgressChanged += progressHandler;
                 if (completedHandler != null) wc.DownloadFileCompleted += completedHandler;
+                wc.DownloadFileCompleted += TrackFileDownloadCompletion;
+
+                if (Configuration.EnableTracking)
+                {
+                    Configuration.Tracker.TrackAsync(
+                        new EventTracking()
+                        {
+                            ClientId = Configuration.UserID.ToString(),
+                            Action = String.Format("Download {0} Started", this.Filename),
+                            DocumentTitle = this.Name,
+                            DocumentPath = Filename
+                        });
+                }
+
                 wc.DownloadFileAsync(new Uri(Properties.Resources.RootAddress + Filename), BasePath + Filename);
+            }
+        }
+
+        private async void TrackFileDownloadCompletion(object sender, AsyncCompletedEventArgs asyncCompletedEventArgs)
+        {
+            if (Configuration.EnableTracking)
+            {
+                await
+                    Configuration.Tracker.TrackAsync(
+                        new EventTracking()
+                        {
+                            ClientId = Configuration.UserID.ToString(),
+                            Action = String.Format("Download {0} Finished", this.Filename),
+                            DocumentTitle = this.Name,
+                            DocumentPath = Filename
+                        });
             }
         }
 
@@ -107,7 +147,6 @@ namespace LolAnimationChanger.Data
                     stream.Close();
                 }
             }
-
         }
 
         public Boolean Extract()
@@ -157,8 +196,7 @@ namespace LolAnimationChanger.Data
 
         public Boolean Apply()
         {
-            var themeSettingsFilePath = String.Format("{0}{1}", Configuration.GamePath,
-                Configuration.ThemeConfigFile);
+            var themeSettingsFilePath = String.Format("{0}{1}", Configuration.GamePath, Configuration.ThemeConfigFile);
 
             if (!File.Exists(String.Format("{0}.bak", themeSettingsFilePath)))
             {
@@ -185,7 +223,7 @@ namespace LolAnimationChanger.Data
                 var themeDirName = (Filename == null && SHA1 == null) ? Name : Filename.Replace(".zip", "");
 
                 String config = File.ReadAllText(themeSettingsFilePath)
-                    .RegExpReplace(@"(themeConfig=)(?:.*)", String.Format(@"$1{0}{1}", themeDirName, RequiredResources));
+                    .RegExpReplace(@"(themeConfig=)(?:.*)", String.Format("$1{0}{1}", themeDirName, RequiredResources));
 
                 File.WriteAllText(themeSettingsFilePath, config);
 
@@ -223,5 +261,26 @@ namespace LolAnimationChanger.Data
         }
 
         #endregion
+
+        public void Delete()
+        {
+            var dirName = String.Format("{0}{1}{2}", Configuration.GamePath, Configuration.ThemeDirPath,
+                Filename.Replace(".zip", ""));
+            try
+            {
+                if (File.Exists(Path.Combine(BasePath, Filename)))
+                {
+                    File.Delete(Path.Combine(BasePath, Filename));
+                }
+                if (Directory.Exists(dirName))
+                {
+                    Directory.Delete(dirName, true);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, Strings.Error, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
     }
 }
