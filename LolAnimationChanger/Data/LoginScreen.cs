@@ -281,6 +281,10 @@ namespace LolAnimationChanger.Data
             {
                 MessageBox.Show(ex.Message, Strings.Error, MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            finally
+            {
+                this._isDownloaded = false;
+            }
         }
     }
 }
