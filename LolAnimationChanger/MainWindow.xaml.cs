@@ -190,9 +190,9 @@ namespace LolAnimationChanger
 
         private void DownloadButton_Click(object sender, RoutedEventArgs e)
         {
-            DownloadEnabled = false;
             if (DownloadScreen != null)
             {
+                DownloadEnabled = false;
                 _lastBytes = 0;
                 DownloadScreen.Download(DownloadProgressHandler, DownloadCompletedHandler);
             }
